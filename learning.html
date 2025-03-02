@@ -706,13 +706,13 @@ button:hover {
         <h2>شرح برمجة 2</h2>
         <p class="subscription-benefits">
             <div class="section-content" style="flex: 1;">
-                <h2>النظري <i class="fas fa-book"></i></h2>
+            <h2>النظري <i class="fas fa-book"></i></h2>
             <p>محتوى القسم الأول</p>
             <a href="#" class="cta-button" onclick="toggleLectureLinks('lectureLinks')">شابتر 1 Arrays</a>
             <div id="lectureLinks" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="lecture1_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> التجريبي 1-17</a>
-                <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 2</a>
-                <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 3</a>
+            <a href="lecture1_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> التجريبي 1-17</a>
+            <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 2</a>
+            <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 3</a>
             </div>
             <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 2 </a>
             <div id="lectureLinks2" style="display: none; margin-top: 10px;">
@@ -745,21 +745,24 @@ button:hover {
             <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
             </div>
             </div>
-
             <div class="section-content" style="flex: 1;">
             <h2>العملي <i class="fas fa-desktop"></i></h2>
             <p>محتوى القسم الثاني</p>
+            <a href="#" class="cta-button" onclick="toggleLectureLinks('practicalLinks4')"> التجريبي العملي </a>
+            <div id="practicalLinks4" style="display: none; margin-top: 10px;">
+                <a href="practical4_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> OOP </a>
+            </div>
             <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()"> لاب 1 </a>
             <div id="practicalLinks" style="display: none; margin-top: 10px;">
-            <a href="practical_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> اكسرسايز 1</a>
-            <a href="practical_part2.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 2</a>
-            <a href="practical_part3.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 3</a>
+                <a href="practical_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> اكسرسايز 1</a>
+                <a href="practical_part2.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 2</a>
+                <a href="practical_part3.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 3</a>
             </div>
             <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()"> لاب 2 </a>
             <div id="practicalLinks2" style="display: none; margin-top: 10px;">
-            <a href="practical2_part1.html" class="secondary-button"><i class="fas fa-lock"></i>  اكسرسايز 1</a>
-            <a href="practical2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 2</a>
-            <a href="practical2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 3</a>
+                <a href="practical2_part1.html" class="secondary-button"><i class="fas fa-lock"></i>  اكسرسايز 1</a>
+                <a href="practical2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 2</a>
+                <a href="practical2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> اكسرسايز 3</a>
             </div>
             <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()"> لاب 3 </a>
             <div id="practicalLinks3" style="display: none; margin-top: 10px;">
@@ -770,6 +773,20 @@ button:hover {
             </div>
         </p>
         </div>
+        <h2>محتوى اخر <i class="fas fa-link"></i></h2>
+            <p>هنا تجد محتوى مفيد ومرتبط بالمادة  </p>
+            <a href="#" class="cta-button" onclick="toggleLectureLinks('practicalLinks7')"> العملي  </a>
+            <div id="practicalLinks7" style="display: none; margin-top: 10px;">
+                <a href="practical4_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> OOP </a>
+            </div>
+            <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()"> النظري  </a>
+            <div id="practicalLinks8" style="display: none; margin-top: 10px;">
+                <a href="practical4_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i>  </a>
+            </div>
+
+            </div>
+            </div>
+            <div class="section-content" style="flex: 1;">
 
 <!-- Unavailable Modal -->
 <div id="unavailableModal" class="modal">
