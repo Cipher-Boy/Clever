@@ -660,6 +660,7 @@ button:hover {
     </style>
 </head>
 <body>
+    
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -703,164 +704,170 @@ button:hover {
         <!-- Quiz Section -->
         <section class="section">
             <div class="section-content">
-            <h2>Quiz </h2>
-            <p>اختبار متعدد الخيارات</p>
-            <div id="quiz-container" class="quiz-container">
-                <!-- Quiz questions will be inserted here -->
-            </div>
-            <div id="explanation" style="display: none; color: yellow; margin-top: 10px;"></div>
-            <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
+                <h2>Quiz </h2>
+                <p>اختبار متعدد الخيارات</p>
+                <div id="quiz-container" class="quiz-container">
+                    <!-- Quiz questions will be inserted here -->
+                </div>
+                <div id="explanation" style="display: none; color: rgb(41, 121, 117); margin-top: 10px;"></div>
+                <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
+                <div id="explanation" style="display: none; color: rgb(41, 121, 117); margin-top: 10px;"></div>
+                <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
             </div>
         </section>
 
         <script>
             const questions = [
-            {
-                question: "What is an array in Java?",
-                options: [
-                    "A single variable that holds multiple values of different types.",
-                    "A collection of variables of the same type stored in contiguous memory locations.",
-                    "A method that stores multiple variables.",
-                    "A data structure that can only hold primitive data types."
-                ],
-                answer: 1,
-                explanation: "An array in Java is a collection of elements of the same data type stored in contiguous memory locations."
-            },
-            {
-                question: "How do you declare an integer array of size 5 in Java?",
-                options: [
-                    "int[5] arr;",
-                    "int arr = new int[5];",
-                    "int[] arr = new int[5];",
-                    "array int arr = new int[5];"
-                ],
-                answer: 2,
-                explanation: "The correct syntax for declaring an array in Java is dataType[] arrayName = new dataType[size];. Using int[] arr = new int[5]; correctly declares an integer array with 5 elements."
-            },
-            {
-                question: "What is the index of the first element in a Java array?",
-                options: ["1", "0", "-1", "Depends on the array type"],
-                answer: 1,
-                explanation: "In Java, arrays use zero-based indexing, meaning the first element is at index 0, the second at 1, and so on."
-            },
-            {
-                question: "What will happen if you try to access an index outside the array bounds in Java?",
-                options: [
-                    "The program will ignore the access attempt.",
-                    "The program will crash without an error message.",
-                    "An ArrayIndexOutOfBoundsException will be thrown.",
-                    "The program will return null."
-                ],
-                answer: 2,
-                explanation: "If you try to access an index outside the valid range of an array, Java throws an ArrayIndexOutOfBoundsException."
-            },
-            {
-                question: "How do you access the last element of an array named numbers?",
-                options: [
-                    "numbers[numbers.length - 1]",
-                    "numbers[length - 1]",
-                    "numbers[numbers.length]",
-                    "numbers[-1]"
-                ],
-                answer: 0,
-                explanation: "Since array indexing starts at 0, the last element is always at index length - 1. The expression numbers[numbers.length - 1] correctly accesses the last element."
-            },
-            {
-                question: "Which of the following statements correctly initializes a String array?",
-                options: [
-                    "String[] items = {\"Apple\", \"Banana\", \"Orange\"};",
-                    "String items[] = new String(\"Apple\", \"Banana\", \"Orange\");",
-                    "String items = new String[3]{\"Apple\", \"Banana\", \"Orange\"};",
-                    "String items[] = new String[3]{\"Apple\", \"Banana\", \"Orange\"};"
-                ],
-                answer: 0,
-                explanation: "Option A correctly initializes a String array using shorthand format."
-            },
-            {
-                question: "What does the length property of an array return?",
-                options: [
-                    "The total memory occupied by the array.",
-                    "The number of elements in the array.",
-                    "The last index of the array.",
-                    "The maximum value stored in the array."
-                ],
-                answer: 1,
-                explanation: "The length property of an array gives the total number of elements in the array."
-            },
-            {
-                question: "What is the purpose of a two-dimensional array?",
-                options: [
-                    "To store multiple methods inside an array.",
-                    "To store multiple variables of different types.",
-                    "To store a table-like structure with rows and columns.",
-                    "To improve the performance of one-dimensional arrays."
-                ],
-                answer: 2,
-                explanation: "A two-dimensional array represents a table where one index represents the row and the other represents the column."
-            },
-            {
-                question: "How do you loop through an array using a for-each loop in Java?",
-                options: [
-                    "for (int i = 0; i < arr.length; i++) { System.out.println(arr[i]); }",
-                    "for (int element : arr) { System.out.println(element); }",
-                    "while (arr.hasNext()) { System.out.println(arr.next()); }",
-                    "for (var item in arr) { System.out.println(item); }"
-                ],
-                answer: 1,
-                explanation: "The correct syntax for looping through an array using a for-each loop is: for (int element : arr) { System.out.println(element); }"
-            }
-            // Add more questions as needed
+                {
+                    question: "What is an array in Java?",
+                    options: [
+                        "A single variable that holds multiple values of different types.",
+                        "A collection of variables of the same type stored in contiguous memory locations.",
+                        "A method that stores multiple variables.",
+                        "A data structure that can only hold primitive data types."
+                    ],
+                    answer: 1,
+                    explanation: "An array in Java is a collection of elements of the same data type stored in contiguous memory locations."
+                },
+                {
+                    question: "How do you declare an integer array of size 5 in Java?",
+                    options: [
+                        "int[5] arr;",
+                        "int arr = new int[5];",
+                        "int[] arr = new int[5];",
+                        "array int arr = new int[5];"
+                    ],
+                    answer: 2,
+                    explanation: "The correct syntax for declaring an array in Java is dataType[] arrayName = new dataType[size];. Using int[] arr = new int[5]; correctly declares an integer array with 5 elements."
+                },
+                {
+                    question: "What is the index of the first element in a Java array?",
+                    options: ["1", "0", "-1", "Depends on the array type"],
+                    answer: 1,
+                    explanation: "In Java, arrays use zero-based indexing, meaning the first element is at index 0, the second at 1, and so on."
+                },
+                {
+                    question: "What will happen if you try to access an index outside the array bounds in Java?",
+                    options: [
+                        "The program will ignore the access attempt.",
+                        "The program will crash without an error message.",
+                        "An ArrayIndexOutOfBoundsException will be thrown.",
+                        "The program will return null."
+                    ],
+                    answer: 2,
+                    explanation: "If you try to access an index outside the valid range of an array, Java throws an ArrayIndexOutOfBoundsException."
+                },
+                {
+                    question: "How do you access the last element of an array named numbers?",
+                    options: [
+                        "numbers[numbers.length - 1]",
+                        "numbers[length - 1]",
+                        "numbers[numbers.length]",
+                        "numbers[-1]"
+                    ],
+                    answer: 0,
+                    explanation: "Since array indexing starts at 0, the last element is always at index length - 1. The expression numbers[numbers.length - 1] correctly accesses the last element."
+                },
+                {
+                    question: "Which of the following statements correctly initializes a String array?",
+                    options: [
+                        "String[] items = {\"Apple\", \"Banana\", \"Orange\"};",
+                        "String items[] = new String(\"Apple\", \"Banana\", \"Orange\");",
+                        "String items = new String[3]{\"Apple\", \"Banana\", \"Orange\"};",
+                        "String items[] = new String[3]{\"Apple\", \"Banana\", \"Orange\"};"
+                    ],
+                    answer: 0,
+                    explanation: "Option A correctly initializes a String array using shorthand format."
+                },
+                {
+                    question: "What does the length property of an array return?",
+                    options: [
+                        "The total memory occupied by the array.",
+                        "The number of elements in the array.",
+                        "The last index of the array.",
+                        "The maximum value stored in the array."
+                    ],
+                    answer: 1,
+                    explanation: "The length property of an array gives the total number of elements in the array."
+                },
+                {
+                    question: "What is the purpose of a two-dimensional array?",
+                    options: [
+                        "To store multiple methods inside an array.",
+                        "To store multiple variables of different types.",
+                        "To store a table-like structure with rows and columns.",
+                        "To improve the performance of one-dimensional arrays."
+                    ],
+                    answer: 2,
+                    explanation: "A two-dimensional array represents a table where one index represents the row and the other represents the column."
+                },
+                {
+                    question: "How do you loop through an array using a for-each loop in Java?",
+                    options: [
+                        "for (int i = 0; i < arr.length; i++) { System.out.println(arr[i]); }",
+                        "for (int element : arr) { System.out.println(element); }",
+                        "while (arr.hasNext()) { System.out.println(arr.next()); }",
+                        "for (var item in arr) { System.out.println(item); }"
+                    ],
+                    answer: 1,
+                    explanation: "The correct syntax for looping through an array using a for-each loop is: for (int element : arr) { System.out.println(element); }"
+                }
+                // Add more questions as needed
             ];
 
             let currentQuestionIndex = 0;
             let shuffledQuestions = [];
+            let answered = false;
 
             function shuffleQuestions() {
-            shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+                shuffledQuestions = questions.sort(() => Math.random() - 0.5);
             }
 
             function showQuestion(index) {
-            const quizContainer = document.getElementById('quiz-container');
-            quizContainer.innerHTML = `
-                <h3>${shuffledQuestions[index].question}</h3>
-                ${shuffledQuestions[index].options.map((option, i) => `
-                <div class="option-container" onclick="checkAnswer(${i})">
-                    <label class="option-label">${option}</label>
-                </div>
-                `).join('')}`;
-            document.getElementById('next-question').style.display = 'block';
-            document.getElementById('explanation').style.display = 'none';
+                const quizContainer = document.getElementById('quiz-container');
+                quizContainer.innerHTML = `
+                    <h3>${shuffledQuestions[index].question}</h3>
+                    ${shuffledQuestions[index].options.map((option, i) => `
+                    <div class="option-container" onclick="checkAnswer(${i})">
+                        <label class="option-label">${option}</label>
+                    </div>
+                    `).join('')}`;
+                document.getElementById('next-question').style.display = 'block';
+                document.getElementById('explanation').style.display = 'none';
+                answered = false;
             }
 
             function checkAnswer(selectedIndex) {
-            const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
-            const options = document.querySelectorAll('.option-container');
-            options.forEach((option, index) => {
-                if (index === selectedIndex) {
-                option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
-                if (selectedIndex !== correctIndex) {
-                    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${shuffledQuestions[currentQuestionIndex].options[correctIndex]}. ${shuffledQuestions[currentQuestionIndex].explanation}`;
-                    document.getElementById('explanation').style.display = 'block';
-                }
-                } else {
-                option.style.backgroundColor = 'rgba(44, 44, 44, 0.5)';
-                }
-            });
+                if (answered) return;
+                answered = true;
+                const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
+                const options = document.querySelectorAll('.option-container');
+                options.forEach((option, index) => {
+                    if (index === selectedIndex) {
+                        option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
+                        if (selectedIndex !== correctIndex) {
+                            document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${shuffledQuestions[currentQuestionIndex].options[correctIndex]}. ${shuffledQuestions[currentQuestionIndex].explanation}`;
+                            document.getElementById('explanation').style.display = 'block';
+                        }
+                    } else {
+                        option.style.backgroundColor = 'rgba(44, 44, 44, 0.5)';
+                    }
+                });
             }
 
             function showNextQuestion() {
-            const selectedOption = document.querySelector('.option-container[style*="background-color: green"], .option-container[style*="background-color: red"]');
-            if (selectedOption) {
-                currentQuestionIndex++;
-                if (currentQuestionIndex < shuffledQuestions.length) {
-                showQuestion(currentQuestionIndex);
+                const selectedOption = document.querySelector('.option-container[style*="background-color: green"], .option-container[style*="background-color: red"]');
+                if (selectedOption) {
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < shuffledQuestions.length) {
+                        showQuestion(currentQuestionIndex);
+                    } else {
+                        alert('لقد أكملت الاختبار!');
+                        document.getElementById('next-question').style.display = 'none';
+                    }
                 } else {
-                alert('لقد أكملت الاختبار!');
-                document.getElementById('next-question').style.display = 'none';
+                    alert('يرجى اختيار إجابة قبل الانتقال إلى السؤال التالي.');
                 }
-            } else {
-                alert('يرجى اختيار إجابة قبل الانتقال إلى السؤال التالي.');
-            }
             }
 
             shuffleQuestions();
