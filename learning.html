@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>التعلم</title>
-    <link rel="icon" href="https://cdn.discordapp.com/attachments/1299398520746545204/1345913972431257652/Screenshot_2025-03-03_031111-removebg-preview.png?ex=67c79910&is=67c64790&hm=3e5de02060d61e209e1920502f1e6b9bf766d27b776ed41810b9bd59b1a93194&" type="image/png">
+    <title>الشرح</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -719,7 +718,7 @@ button:hover {
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
-                <img src="https://cdn.discordapp.com/attachments/1299398520746545204/1345913972431257652/Screenshot_2025-03-03_031111-removebg-preview.png?ex=67c79910&is=67c64790&hm=3e5de02060d61e209e1920502f1e6b9bf766d27b776ed41810b9bd59b1a93194&"  alt="Celvar" >
+                <img src="https://cdn.discordapp.com/attachments/1299398520746545204/1345913972431257652/Screenshot_2025-03-03_031111-removebg-preview.png?ex=67c64790&is=67c4f610&hm=5fa76ee7db71bc8bcbdc173f1aa55ccc83aae77f33349c069acb28e9fe286d64&"  alt="Celvar" >
             </div>
             <div class="nav-links">
                 <a href="index.html">الرئيسية</a>
@@ -761,55 +760,55 @@ button:hover {
             <div class="section-content">
                 <h2>النظري <i class="fas fa-book"></i></h2>
                 <p>محتوى القسم النظري</p>
-                <a href="#" class="cta-button" onclick="toggleLectureLinks('lectureLinks1', event)">شابتر 1: Arrays</a>
+                <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks1')">شابتر 1: Arrays</a>
                 <div id="lectureLinks1" class="lecture-links" style="display: none; margin-top: 10px;">
-                    <a href="https://t.me/JavaUqU/52" class="secondary-button"><i class="fas fa-lock-open"></i> التجريبي 1-17</a>
-                    <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 2</a>
-                    <a href="#" class="secondary-button dark-faded" onclick="changeColorAndDisable(this);"><i class="fas fa-lock"></i> الجزء 3</a>
+                    <a href="https://t.me/JavaUqU/52" class="secondary-button" target="_blank"><i class="fas fa-lock-open"></i> التجريبي 1-17</a>
+                    <a href="https://t.me/c/2292771315/7" class="secondary-button" target="_blank"><i class="fas fa-lock"></i> الجزء 2 (18-50)</a>
+                    <a href="#" class="secondary-button dark-faded" onclick="showUnavailableModal(event, this);"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 2: Functions</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 2: Functions</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 3: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 3: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 4: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 4: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 5: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 5: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 6: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 6: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 7: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 7: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 8: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 8: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
                     <a href="lecture2_part3.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 3</a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">شابتر 9: -</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">شابتر 9: -</a>
                 <div id="lectureLinks2" style="display: none; margin-top: 10px;">
                     <a href="lecture2_part1.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 1</a>
                     <a href="lecture2_part2.html" class="secondary-button"><i class="fas fa-lock"></i> الجزء 2</a>
@@ -823,11 +822,13 @@ button:hover {
             <div class="section-content">
                 <h2>العملي <i class="fas fa-desktop"></i></h2>
                 <p>محتوى القسم العملي</p>
-                <a href="https://t.me/JavaUqU/52" class="cta-button" onclick="">التجريبي العملي</a>
+                <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks1')">التجريبي العملي</a>
                 <div id="practicalLinks1" style="display: none; margin-top: 10px;">
                     <a href="https://t.me/JavaUqU/52" class="secondary-button" target="_blank">
-                        <i class="fas fa-lock-open"></i> مقدمة عن الأراي
-                    </a>
+                        <i class="fas fa-lock-open"></i> 1 Array مقدمة للـ</a>
+
+                        <a href="https://t.me/JavaUqU/55" class="secondary-button" target="_blank">
+                            <i class="fas fa-lock-open"></i> 2 Array مقدمة للـ</a>
                 </div>
                 <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">لاب 1: Basics</a>
                 <div id="practicalLinks2" style="display: none; margin-top: 10px;">
@@ -844,16 +845,13 @@ button:hover {
             <div class="section-content">
                 <h2>محتوى آخر <i class="fas fa-link"></i></h2>
                 <p>هنا تجد محتوى مفيد ومرتبط بالمادة</p>
-                <a href="#" class="cta-button" onclick="toggleLectureLinks('practicalLinks3')">العملي</a>
+                <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks3')">العملي</a>
                 <div id="practicalLinks3" style="display: none; margin-top: 10px;">
                     <a href="https://t.me/JavaUqU/52" class="secondary-button" target="_blank">
                         <i class="fas fa-lock-open"></i> مقدمة عن الأراي
                     </a>
-                    <a href="https://t.me/JavaUqU/55" class="secondary-button" target="_blank">
-                        <i class="fas fa-lock-open"></i>   Part 2 مقدمة عن الأراي
-                    </a>
                 </div>
-                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal()">النظري</a>
+                <a href="#" class="cta-button dark-faded" onclick="showUnavailableModal(event)">النظري</a>
                 <div id="practicalLinks4" style="display: none; margin-top: 10px;">
                     <a href="practical4_part1.html" class="secondary-button"><i class="fas fa-lock-open"></i> مقدمة</a>
                 </div>
@@ -873,19 +871,23 @@ button:hover {
     </div>
 
 <script>
-    function showUnavailableModal() {
-        document.getElementById("unavailableModal").style.display = "flex";
-    }
+    function showUnavailableModal(event) {
+    event.preventDefault(); 
+    document.getElementById("unavailableModal").style.display = "flex";
+}
+
 
     function closeUnavailableModal() {
         document.getElementById("unavailableModal").style.display = "none";
     }
 
-    function changeColorAndDisable(element) {
-        showUnavailableModal();
-        element.style.backgroundColor = '#333';
-        element.style.pointerEvents = 'none';
-    }
+    function changeColorAndDisable(event, element) {
+    event.preventDefault(); 
+    showUnavailableModal();
+    element.style.backgroundColor = '#333';
+    element.style.pointerEvents = 'none';
+}
+
 </script>
 
 <style>
@@ -910,7 +912,9 @@ button:hover {
 </style>
 
         <script>
-function toggleLectureLinks(id) {
+function toggleLectureLinks(event, id) {
+    event.preventDefault(); // يمنع انتقال المستخدم لأعلى الصفحة
+
     const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
     sections.forEach(section => {
         if (section.id === id) {
