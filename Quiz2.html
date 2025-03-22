@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --glow-color: #45c4ff;
+            --bg-color: #1a1a1a;
+            --input-bg: #2c2c2c;
+            --border-color: #3c3c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--glow-color);
+            box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12rem;
+        }
+
+        .logo {
+            width: 200px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-right: auto;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--glow-color);
+            background: rgba(49, 149, 243, 0.1);
+            box-shadow: 0 0 10px rgba(49, 149, 243, 0.3);
+        }
+
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            padding: 120px 20px 40px;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 20px;
+            background: rgba(44, 44, 44, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-content {
+            flex: 1;
+        }
+
+        .section-image {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            color: var(--glow-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(49, 149, 243, 0.3);
+        }
+
+        .section p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #cccccc;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(49, 149, 243, 0.3);
+            color: var(--glow-color);
+            text-decoration: none;
+            border: 2px solid var(--glow-color);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(69, 199, 255, 0.5);
+        }
+
+        /* Team section styles */
+    .team-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .team-cards {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 400px; /* Fixed height for cards container */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .team-card {
+        position: absolute;
+        width: 300px;
+        background: rgba(44, 44, 44, 0.5);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+        border: 1px solid var(--border-color);
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.5s ease;
+        pointer-events: none;
+    }
+	
+    .team-card.active {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+
+    .team-card.prev {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    .team-card.next {
+        opacity: 0;
+        transform: translateX(100%);
+    }	
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .team-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(49, 149, 243, 0.3);
+            border-color: var(--glow-color);
+        }
+
+    .team-card .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        overflow: hidden;
+        border: 3px solid var(--glow-color);
+        box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .team-card.active:hover .profile-image {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(49, 149, 243, 0.5);
+    }
+
+    .team-card .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .team-card h3 {
+        color: var(--glow-color);
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .team-card p {
+        color: #cccccc;
+        font-size: 1rem;
+    }
+
+        /* Footer styles */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 2px solid var(--glow-color);
+            padding: 3rem 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+        }
+
+        .footer-section h3 {
+            color: var(--glow-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--glow-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: #888;
+        }
+
+        pre {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+
+        /* Responsive design */
+        @media (max-width: 968px) {
+            .section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-image {
+                order: -1;
+            }
+
+            .team-cards {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 20px;
+            }
+
+            .team-card {
+                scroll-snap-align: start;
+                min-width: 280px;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-container {
+        padding: 0.01rem;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0.5rem 0;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+
+            .logo img {
+                width: 120px;
+            }
+
+            .animated-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .coming-soon {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                padding: 1.5rem 0.5rem;
+                gap: 0.5rem;
+            }
+
+            .footer-section {
+                padding: 0 0.25rem;
+            }
+
+            .footer-section h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                text-align: left;
+                padding-left: 0.5rem;
+            }
+
+            .footer-section ul li {
+                font-size: 0.8rem;
+                margin-bottom: 0.25rem;
+                text-align: left;
+                padding-left: 0.5rem;
+            }
+
+            .copyright {
+                padding: 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        .price-box {
+    width: 350px;
+    background: rgba(44, 44, 44, 0.5);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.price-box:hover {
+    transform: translateY(-10px);
+}
+
+.lock-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.lock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.lock::before {
+    content: "\f023"; /* Default closed lock */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 4rem;
+    color: var(--glow-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.price-box:hover .lock::before {
+    content: "\f09c"; /* Open lock on hover */
+}
+
+.price {
+    color: var(--glow-color);
+    font-size: 2rem;
+    margin-top: 20px;
+    filter: none; /* Updated */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.payment-info p {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.price-box {
+    width: 350px;
+    background: rgba(44, 44, 44, 0.5);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 0 10px rgba(49, 149, 243, 0.5);
+}
+
+.price-box:hover {
+    transform: translateY(-10px);
+    border: 2px solid var(--glow-color);
+}
+
+.lock-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.lock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.lock::before {
+    content: "\f023"; /* Default closed lock */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 4rem;
+    color: var(--glow-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.price-box:hover .lock::before {
+    content: "\f09c"; /* Open lock on hover */
+}
+
+.price {
+    color: var(--glow-color);
+    font-size: 2rem;
+    margin-top: 20px;
+    filter: none; /* Updated */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--input-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    color: #fff;
+    width: 90%;
+    max-width: 500px;
+    text-align: right;
+    box-shadow: 0 0 20px rgba(49, 149, 243, 0.5);
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modal-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+}
+
+.payment-info p {
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 1rem;
+    text-align: right;
+}
+
+.image-upload, .phone-input {
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.image-upload label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.phone-input input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--input-bg);
+    color: #fff;
+    text-align: right;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background: var(--glow-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+}
+
+button:hover {
+    background: #4CAF50;
+}
+
+.modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--glow-color);
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .section-content {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .section-image {
+        order: -1;
+        margin-bottom: 20px;
+    }
+
+    .cta-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .secondary-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png"  alt="Celvar" >
+            </div>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="learning.html"> الشرح</a>
+                <a href="ex.html" class="active">الاختبارات</a>
+            </div>
+            <div>
+                <a href="#" class="cta-button" style="font-size: 0.6rem;" onclick="showSignUpModal()">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="back-btn" onclick="closeSignUpModal()">&#8592;</button>
+            </div>
+            <h3>التسجيل غير متوفر حاليا</h3>
+            <button onclick="closeSignUpModal()">موافق</button>
+        </div>
+    </div>
+
+    <script>
+        function showSignUpModal() {
+            document.getElementById("signUpModal").style.display = "flex";
+        }
+
+        function closeSignUpModal() {
+            document.getElementById("signUpModal").style.display = "none";
+        }
+    </script>
+
+    <main class="main-content">
+        <!-- Quiz Section -->
+        <section class="section">
+            <div class="section-content">
+                <h2>Quiz </h2>
+                <div id="quiz-container" class="quiz-container">
+                    <!-- Quiz questions will be inserted here -->
+                </div>
+                <div id="explanation" style="display: none; color: rgb(41, 121, 117); margin-top: 10px;"></div>
+                <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
+            </div>
+        </section>
+
+        <script>
+            const questions = [
+                {
+        question: ` Given a user-defined class called Tree, what is the output?<br><br>
+        <pre><code>public class Tree {
+    String color;
+    public Tree(String c) {
+        color = c;
+    }
+    public String getColor() {
+        return color;
+    }
+    public static void change(Tree t1, Tree t2) {
+        t2 = t1;
+    }
+    public static void main(String[] args) {
+        Tree olive = new Tree("Green");
+        Tree almond = new Tree("Brown");
+        change(olive, almond);
+        System.out.println(olive.getColor());
+    }
+}</code></pre>
+        `,
+        options: [
+            "Green",
+            "Brown",
+            "null",
+            "Compilation Error"
+        ],
+                    answer: 0,
+                    explanation: `
+                    The output is 'Green' because Java passes objects by reference. However, reassigning 't2 = t1' only changes the local reference, not the original object.`
+                },
+                {
+                    question: ` How many object references are created in the following code?<br><br>
+        <pre><code>Flower dandelion = new Flower ( ) ;
+Flower sunflower;
+char flower;
+Tree olive— new Tree ( ) ;</code></pre>
+        `,
+        options: [
+                        "3",
+                        "2",
+                        "0",
+                        "1"
+                    ],
+                    answer: 1,
+                    explanation: `
+                    The object references created are dandelion and olive, making a total of 2 object references.`
+                },
+                {
+                    question: ` Given a user-defined class called Tree, what is the output?<br><br>
+        <pre><code>public class Tree {
+    private String color;
+
+    public Tree(String c) {
+        color = c;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String c) {
+        color = c;
+    }
+
+    public static void change(Tree t1, Tree t2) {
+        String c = t2.getColor();
+        t1.setColor(c);
+    }
+
+    public static void main(String[] args) {
+        Tree olive = new Tree("Green");
+        Tree almond = new Tree("Brown");
+        change(olive, almond);
+        System.out.println(olive.getColor());
+    }
+}</code></pre>
+        `,
+        options: [
+            "Brown",
+            "Error: null pointer exception",
+            "The memory location of almond",
+            "Green"
+        ],
+                    answer: 0,
+                    explanation: `
+        - The change method modifies the color of the first Tree object to match the color of the second Tree object.
+        - The main method demonstrates this by changing the color of olive from Green to Brown and then printing the updated color.`
+                },
+                {
+                    question: "Which statement is true about obects:",
+                    options: [
+                        "The reference contains data rather than a memory address",
+                        "Its declaration and creation could be combined in one statement",
+                        "Two objects of same class can not refer to the same memory location",
+                        "The ( this ) operator is used to create it"
+                    ],
+                    answer: 1,
+                    explanation: `In Java, you can declare and create an object in a single statement.
+                    Like: 
+                        Tree olive = new Tree("Green");
+                    `
+                },
+                {
+                    question: `Which of the following statements is correct to replace XXX in the following code:
+                    <pre><code>public class Fruit {
+    public String myColor;
+    public String myName;
+    public boolean peel;
+
+    public boolean doesHaveSkin() {
+        return peel;
+    }
+
+    public static void main(String[] args) {
+        Fruit fruityObj = new Fruit();
+        XXX
+    }
+}</code></pre>
+                    `,
+                    options: [
+                        `System.out.println("l have skin?" + doesHaveSkin ());`,
+                        `System.out.println("l have skin? " + doesHaveSkin (frui tyObj ));`,
+                        `System.out.println("l have skin? ");`,
+                        `System.out.println("l have skin? " + fruityObj.doesHaveSkin ());`
+                    ],
+                    answer: 3,
+                    explanation: `
+
+                    - fruityObj.doesHaveSkin() calls the doesHaveSkin() method on the fruityObj instance.
+                    - The result of doesHaveSkin() (a boolean value) is concatenated to the string "l have skin? ".
+                    - The complete string is then printed to the console.
+
+                    Example Output:
+- If peel is set to true for fruityObj, the output will be:
+      l have skin? true
+- If peel is set to false, the output will be:
+      l have skin? false
+                    `
+                },
+                {
+                    question: `How many objects of type Chocolate are created in the following code?<br><br>
+                    <pre><code>Chocolate milk = new Chocolate ();
+Chocolate dark;
+String chocolate;
+Milk chocolate = new Milk() ;</code></pre>
+                    `,
+                    options: [
+                        "0",
+                        "2",
+                        "1",
+                        "3"
+                    ],
+                    answer: 2,
+                    explanation: `
+                    - Only one object of type Chocolate is created in the given code (new Chocolate()).
+                    - The other lines either declare variables without creating objects or create objects of different types (Milk).`
+                },
+                {
+                    question: `How many fields are declared in the class?
+                    <pre><code>public class Food {
+public void addFood(String name) {};
+public void disptayNutrition(String type) {};
+public int calculateCalories() {};
+}</code></pre>
+                    `,
+                    options: [
+                        "1",
+                        "2",
+                        "3",
+                        "None"
+                    ],
+                    answer: 3,
+                    explanation: `
+                    - The class Food contains three methods but no fields.
+                    - Fields are variables that store data, and none are present in the provided code.`
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+    let shuffledQuestions = [];
+    let answered = false;
+    let correctAnswers = 0; // متغير لتتبع عدد الإجابات الصحيحة
+
+    function shuffleQuestions() {
+        shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+    }
+
+    function showQuestion(index) {
+        const quizContainer = document.getElementById('quiz-container');
+        quizContainer.innerHTML = `
+            <h3>${shuffledQuestions[index].question}</h3>
+            ${shuffledQuestions[index].options.map((option, i) => `
+            <div class="option-container" onclick="checkAnswer(${i})">
+                <label class="option-label">${option}</label>
+            </div>
+            `).join('')}`;
+        document.getElementById('next-question').style.display = 'block';
+        document.getElementById('explanation').style.display = 'none';
+        answered = false;
+    }
+
+    function checkAnswer(selectedIndex) {
+    if (answered) return;
+    answered = true;
+    const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
+    const options = document.querySelectorAll('.option-container');
+    options.forEach((option, index) => {
+        if (index === selectedIndex) {
+            option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
+            if (selectedIndex === correctIndex) {
+                correctAnswers++; // زيادة عدد الإجابات الصحيحة
+            }
+        } else if (index === correctIndex) {
+            option.style.backgroundColor = '#45c4ff'; // لون الإجابة الصحيحة
+        } else {
+            option.style.backgroundColor = 'rgba(44, 44, 44, 0.5)';
+        }
+    });
+
+    // تغيير لون تفسير الإجابة الصحيحة
+    document.getElementById('explanation').style.color = '#4CAF50'; // لون جديد
+    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${shuffledQuestions[currentQuestionIndex].options[correctIndex]}. ${shuffledQuestions[currentQuestionIndex].explanation}`;
+    document.getElementById('explanation').style.display = 'block';
+}
+
+    function showNextQuestion() {
+        const selectedOption = document.querySelector('.option-container[style*="background-color: green"], .option-container[style*="background-color: red"]');
+        if (selectedOption) {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                showFinalResult(); // عرض النتيجة النهائية
+            }
+        } else {
+            alert('يرجى اختيار إجابة قبل الانتقال إلى السؤال التالي.');
+        }
+    }
+
+    function showFinalResult() {
+        const totalQuestions = shuffledQuestions.length;
+        const percentage = (correctAnswers / totalQuestions) * 100;
+        let rating = '';
+
+        if (percentage >= 90) {
+            rating = 'ممتاز';
+        } else if (percentage >= 70) {
+            rating = 'جيد';
+        } else {
+            rating = 'تحتاج مراجعة';
+        }
+
+        const quizContainer = document.getElementById('quiz-container');
+        quizContainer.innerHTML = `
+            <h3>النتيجة النهائية</h3>
+            <p>عدد الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
+            <p>النسبة المئوية: ${percentage.toFixed(2)}%</p>
+            <p>التقييم: ${rating}</p>
+        `;
+        document.getElementById('next-question').style.display = 'none';
+        document.getElementById('explanation').style.display = 'none';
+    }
+
+    shuffleQuestions();
+    showQuestion(currentQuestionIndex);
+</script>
+
+        <style>
+            .option-container {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            background: rgba(44, 44, 44, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            }
+
+            .option-container:hover {
+            background: rgba(44, 44, 44, 0.7);
+            }
+
+            .option-label {
+            margin-left: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            }
+        </style>
+            }
+        </style>
+
+        <script>
+        function toggleLectureLinks(id) {
+            const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
+            sections.forEach(section => {
+            if (section.id === id) {
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') {
+                    section.style.opacity = 0;
+                    setTimeout(() => {
+                        section.style.opacity = 1;
+                        section.style.transition = 'opacity 0.5s ease-in-out';
+                    }, 10);
+                }
+            } else {
+                section.style.display = 'none';
+            }
+            });
+        }
+        </script>
+        <style>
+        .secondary-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(184, 69, 255, 0.3); /* Changed color */
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid rgba(193, 69, 255, 0.5); /* Changed color */
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Increased margin-bottom to separate buttons more */
+        }
+
+        .secondary-button:hover {
+            background: rgba(193, 69, 255, 0.5); /* Changed color */
+            color: #000;
+            box-shadow: 0 0 20px rgba(193, 69, 255, 0.5); /* Changed color */
+        }
+
+        .secondary-button:active {
+            transform: scale(0.95);
+        }
+        </style>
+
+    <script>
+        function openLectureLinks() {
+            const links = document.getElementById('lectureLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks2() {
+            const links = document.getElementById('lectureLinks2');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks3() {
+            const links = document.getElementById('lectureLinks3');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks4() {
+            const links = document.getElementById('lectureLinks4');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks5() {
+            const links = document.getElementById('lectureLinks5');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks6() {
+            const links = document.getElementById('lectureLinks6');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openPracticalLinks() {
+            const links = document.getElementById('practicalLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+    </script>
+
+        <script>
+        function openLectureLinks() {
+            const links = document.getElementById('lectureLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+        </script>
+    </div>
+</section>
+</section>
+
+
+    <!-- مقطع تجريبي Section -->
+
+
+    </main>
+
+    <footer>
+        <div class="copyright">
+            <p>© 2025 Clever</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
