@@ -757,48 +757,64 @@ button:hover {
 
 
     <main class="main-content">
-<!-- Price Section -->
-<section class="section">
-    <div class="section-content">
-        <h2>   </h2>
-        <p>  </p>
-        <p class="subscription-benefits">
-            <div class="section-content" style="flex: 1;">
 
-                <h2>الاختبارات</h2>
-                <p> سيتم اضافة المزيد من الكويزات قريباً </p>
-                <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks')">شابتر 1 Arrays</a>
-                <div id="lectureLinks" class="lecture-links" style="display: none; margin-top: 10px;">
-                    <a href="Quiz1.html" class="secondary-button"><i class="fas fa-file-alt"></i> بدء الاختبار</a>
-                </div>
+    <!-- Section: الاختبارات النظرية -->
+    <section class="section">
+        <div class="section-content" style="flex: 1;">
+            <h2>الاختبارات النظرية</h2>
+
+            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks1')">شابتر 1 Arrays</a>
+            <div id="lectureLinks1" class="lecture-links" style="display: none; margin-top: 10px;">
+                <a href="Quiz1.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz1</a>
             </div>
-        </p>
 
+            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks2')">شابتر 2 Objects, Classes, and Instances</a>
+            <div id="lectureLinks2" class="lecture-links" style="display: none; margin-top: 10px;">
+                <a href="Quiz2.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz1</a>
+                <a href="Quiz3.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz2</a>
+            </div>
 
-        <script>
+        </div>
+    </section>
+
+    <!-- Section: الاختبارات العملية -->
+    <section class="section">
+        <div class="section-content" style="flex: 1;">
+            <h2>الاختبارات العملية</h2>
+
+            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks')">تمارين على Arrays</a>
+            <div id="practicalLinks" class="lecture-links" style="display: none; margin-top: 10px;">
+                <a href="#" class="secondary-button"><i class="fas fa-file-alt"></i> بدء الاختبار</a>
+            </div>
+        </div>
+    </section>
+
+    <script>
         function toggleLectureLinks(event, id) {
-    event.preventDefault(); 
-    const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
-    sections.forEach(section => {
-        if (section.id === id) {
-            section.style.display = section.style.display === 'none' ? 'block' : 'none';
-            if (section.style.display === 'block') {
-                section.style.opacity = 0;
-                setTimeout(() => {
-                    section.style.opacity = 1;
-                    section.style.transition = 'opacity 0.5s ease-in-out';
-                }, 10);
-            }
-        } else {
-            section.style.display = 'none';
-        }
-    });
-}
+            event.preventDefault(); // منع التنقل إلى الرابط
 
-        
-        
-        
-        </script>
+            // الحصول على جميع الأقسام التي تحتوي على الروابط
+            const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
+
+            sections.forEach(section => {
+                if (section.id === id) {
+                    // التبديل بين العرض والإخفاء
+                    section.style.display = (section.style.display === 'none') ? 'block' : 'none';
+
+                    // إضافة تأثير التلاشي عند العرض
+                    if (section.style.display === 'block') {
+                        section.style.opacity = 0;
+                        setTimeout(() => {
+                            section.style.opacity = 1;
+                            section.style.transition = 'opacity 0.5s ease-in-out';
+                        }, 10);
+                    }
+                } else {
+                    section.style.display = 'none'; // إخفاء باقي الأقسام
+                }
+            });
+        }
+    </script>
         <style>
         .secondary-button {
             display: inline-block;
