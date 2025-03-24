@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
+    <link rel="icon" href="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
@@ -779,7 +780,13 @@ button:hover {
         <script>
             const questions = [
                 {
-        question: ` Given a user-defined class called Tree, what is the output?<br><br>
+                    question: "هل انت مشترك معنا؟",
+                    options: ["نعم", "لا"],
+                    answer: null, // No correct answer for this question
+                    explanation: null // No explanation needed
+                },
+                {
+                    question: ` Given a user-defined class called Tree, what is the output?<br><br>
         <pre><code>public class Tree {
     String color;
     public Tree(String c) {
@@ -961,30 +968,49 @@ public int calculateCalories() {};
     let shuffledQuestions = [];
     let answered = false;
     let correctAnswers = 0; // متغير لتتبع عدد الإجابات الصحيحة
+    let subscriptionAnswer = ''; // متغير لتتبع إجابة السؤال الأول
 
     function shuffleQuestions() {
-        shuffledQuestions = questions.sort(() => Math.random() - 0.5);
+        const otherQuestions = questions.slice(1).sort(() => Math.random() - 0.5);
+        shuffledQuestions = [questions[0], ...otherQuestions]; // Keep the first question fixed
     }
 
     function showQuestion(index) {
-        const quizContainer = document.getElementById('quiz-container');
-        quizContainer.innerHTML = `
-            <h3>${shuffledQuestions[index].question}</h3>
-            ${shuffledQuestions[index].options.map((option, i) => `
-            <div class="option-container" onclick="checkAnswer(${i})">
-                <label class="option-label">${option}</label>
-            </div>
-            `).join('')}`;
-        document.getElementById('next-question').style.display = 'block';
-        document.getElementById('explanation').style.display = 'none';
-        answered = false;
-    }
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>${shuffledQuestions[index].question}</h3>
+        ${shuffledQuestions[index].options.map((option, i) => `
+        <div class="option-container" onclick="checkAnswer(${i})">
+            <label class="option-label">${option}</label>
+        </div>
+        `).join('')}`;
+    document.getElementById('next-question').style.display = 'block';
+    document.getElementById('explanation').style.display = 'none';
+    answered = false;
+}
 
     function checkAnswer(selectedIndex) {
     if (answered) return;
     answered = true;
-    const correctIndex = shuffledQuestions[currentQuestionIndex].answer;
+
+    const currentQuestion = shuffledQuestions[currentQuestionIndex];
+    const correctIndex = currentQuestion.answer;
     const options = document.querySelectorAll('.option-container');
+
+    // إذا كان السؤال الأول
+    if (currentQuestionIndex === 0) {
+        subscriptionAnswer = currentQuestion.options[selectedIndex]; // تخزين إجابة السؤال الأول
+        options.forEach((option, index) => {
+            option.style.backgroundColor = index === selectedIndex ? 'green' : 'rgba(44, 44, 44, 0.5)';
+        });
+
+        // الانتقال مباشرة إلى السؤال التالي
+        currentQuestionIndex++;
+        setTimeout(() => showQuestion(currentQuestionIndex), 500); // تأخير بسيط قبل الانتقال
+        return;
+    }
+
+    // التعامل مع بقية الأسئلة
     options.forEach((option, index) => {
         if (index === selectedIndex) {
             option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
@@ -998,9 +1024,9 @@ public int calculateCalories() {};
         }
     });
 
-    // تغيير لون تفسير الإجابة الصحيحة
+    // عرض تفسير الإجابة الصحيحة
     document.getElementById('explanation').style.color = '#4CAF50'; // لون جديد
-    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${shuffledQuestions[currentQuestionIndex].options[correctIndex]}. ${shuffledQuestions[currentQuestionIndex].explanation}`;
+    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${currentQuestion.options[correctIndex]}. ${currentQuestion.explanation}`;
     document.getElementById('explanation').style.display = 'block';
 }
 
@@ -1019,28 +1045,32 @@ public int calculateCalories() {};
     }
 
     function showFinalResult() {
-        const totalQuestions = shuffledQuestions.length;
-        const percentage = (correctAnswers / totalQuestions) * 100;
-        let rating = '';
+    const totalQuestions = shuffledQuestions.length - 1; // استثناء السؤال الأول من العدد
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    let rating = '';
 
-        if (percentage >= 90) {
-            rating = 'ممتاز';
-        } else if (percentage >= 70) {
-            rating = 'جيد';
-        } else {
-            rating = 'تحتاج مراجعة';
-        }
-
-        const quizContainer = document.getElementById('quiz-container');
-        quizContainer.innerHTML = `
-            <h3>النتيجة النهائية</h3>
-            <p>عدد الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
-            <p>النسبة المئوية: ${percentage.toFixed(2)}%</p>
-            <p>التقييم: ${rating}</p>
-        `;
-        document.getElementById('next-question').style.display = 'none';
-        document.getElementById('explanation').style.display = 'none';
+    if (percentage >= 90) {
+        rating = 'ممتاز';
+    } else if (percentage >= 70) {
+        rating = 'جيد';
+    } else {
+        rating = 'تحتاج مراجعة';
     }
+
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>النتيجة النهائية</h3>
+        <p>عدد الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
+        <p>النسبة المئوية: ${percentage.toFixed(2)}%</p>
+        <p>التقييم: ${rating}</p>
+    `;
+    document.getElementById('next-question').style.display = 'none';
+    document.getElementById('explanation').style.display = 'none';
+
+    // إرسال النتيجة إلى Telegram
+    const messageContent = `📊 **نتيجة الاختبار نظري شابتر 2 Quiz 1 **\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswers} من ${totalQuestions}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
+    sendToTelegram(messageContent);
+}
 
     shuffleQuestions();
     showQuestion(currentQuestionIndex);
@@ -1197,6 +1227,37 @@ public int calculateCalories() {};
 </section>
 </section>
 
+<script>
+function sendToTelegram(messageContent) {
+    const telegramApiToken = "7805737501:AAEWfsLXA-yfzk6sSflJHarX1J4wmQGOW3E";
+    const chatId = "7052304730"; // Your Telegram chat ID
+    const telegramApiUrl = `https://api.telegram.org/bot${telegramApiToken}/sendMessage`;
+
+    const message = {
+        chat_id: chatId,
+        text: messageContent,
+        parse_mode: "Markdown" // Optional: Use Markdown for formatting
+    };
+
+    fetch(telegramApiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Message sent to Telegram successfully!");
+        } else {
+            console.error("Failed to send message to Telegram. Response:", response);
+        }
+    })
+    .catch(error => {
+        console.error("Error sending message to Telegram:", error);
+    });
+}
+</script>
 
     <!-- مقطع تجريبي Section -->
 
