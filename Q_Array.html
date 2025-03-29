@@ -1204,7 +1204,7 @@ function showFinalResult() {
     document.getElementById('explanation').style.display = 'none';
 
     // **إرسال النتيجة إلى Telegram مع إجابة السؤال الأول**
-    const messageContent = `📊 **نتيجة الاختبار**\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswersCount} من ${totalPossibleAnswers}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
+    const messageContent = `📊 **نتيجة الاختبار Arrays**\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswersCount} من ${totalPossibleAnswers}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
     sendToTelegram(messageContent);
 }
 
