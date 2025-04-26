@@ -1,0 +1,1728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mid-Term</title>
+    <link rel="icon" href="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        :root {
+            --glow-color: #45c4ff;
+            --bg-color: #1a1a1a;
+            --input-bg: #2c2c2c;
+            --border-color: #3c3c3c;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: #ffffff;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navbar styles */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(26, 26, 26, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--glow-color);
+            box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+
+        .navbar.hidden {
+            transform: translateY(-100%);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12rem;
+        }
+
+        .logo {
+            width: 200px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-right: auto;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--glow-color);
+            background: rgba(49, 149, 243, 0.1);
+            box-shadow: 0 0 10px rgba(49, 149, 243, 0.3);
+        }
+
+        /* Main content styles */
+        .main-content {
+            flex: 1;
+            padding: 120px 20px 40px;
+        }
+
+        .section {
+            max-width: 1200px;
+            margin: 0 auto 60px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 20px;
+            background: rgba(44, 44, 44, 0.5);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .section:hover {
+            transform: translateY(-5px);
+        }
+
+        .section-content {
+            flex: 1;
+        }
+
+        .section-image {
+            flex: 1;
+            max-width: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .section-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            color: var(--glow-color);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px rgba(49, 149, 243, 0.3);
+        }
+
+        .section p {
+            margin-bottom: 25px;
+            font-size: 1.1rem;
+            color: #cccccc;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(49, 149, 243, 0.3);
+            color: var(--glow-color);
+            text-decoration: none;
+            border: 2px solid var(--glow-color);
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: var(--glow-color);
+            color: var(--bg-color);
+            box-shadow: 0 0 20px rgba(69, 199, 255, 0.5);
+        }
+
+        /* Team section styles */
+    .team-section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .team-cards {
+        display: flex;
+        position: relative;
+        width: 100%;
+        height: 400px; /* Fixed height for cards container */
+        justify-content: center;
+        align-items: center;
+    }
+
+    .team-card {
+        position: absolute;
+        width: 300px;
+        background: rgba(44, 44, 44, 0.5);
+        border-radius: 15px;
+        padding: 25px;
+        text-align: center;
+        box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+        border: 1px solid var(--border-color);
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.5s ease;
+        pointer-events: none;
+    }
+	
+    .team-card.active {
+        opacity: 1;
+        transform: translateX(0);
+        pointer-events: auto;
+    }
+
+    .team-card.prev {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    .team-card.next {
+        opacity: 0;
+        transform: translateX(100%);
+    }	
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .team-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(49, 149, 243, 0.3);
+            border-color: var(--glow-color);
+        }
+
+    .team-card .profile-image {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        margin: 0 auto 20px;
+        overflow: hidden;
+        border: 3px solid var(--glow-color);
+        box-shadow: 0 0 20px rgba(49, 149, 243, 0.3);
+        transition: all 0.3s ease;
+    }
+
+    .team-card.active:hover .profile-image {
+        transform: scale(1.1);
+        box-shadow: 0 0 30px rgba(49, 149, 243, 0.5);
+    }
+
+    .team-card .profile-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .team-card h3 {
+        color: var(--glow-color);
+        margin-bottom: 10px;
+        font-size: 1.5rem;
+    }
+
+    .team-card p {
+        color: #cccccc;
+        font-size: 1rem;
+    }
+
+        /* Footer styles */
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            border-top: 2px solid var(--glow-color);
+            padding: 3rem 0;
+            margin-top: auto;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .footer-section {
+            flex: 1;
+        }
+
+        .footer-section h3 {
+            color: var(--glow-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section ul li a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--glow-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: #888;
+        }
+
+        pre {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
+
+        /* Responsive design */
+        @media (max-width: 968px) {
+            .section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .section-image {
+                order: -1;
+            }
+
+            .team-cards {
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                -webkit-overflow-scrolling: touch;
+                padding-bottom: 20px;
+            }
+
+            .team-card {
+                scroll-snap-align: start;
+                min-width: 280px;
+            }
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-container {
+        padding: 0.01rem;
+        gap: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0.5rem 0;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    .nav-links::-webkit-scrollbar {
+        display: none;
+    }
+
+    .nav-links a {
+        padding: 0.25rem 0.5rem;
+        white-space: nowrap;
+        font-size: 0.9rem;
+    }
+
+            .logo img {
+                width: 120px;
+            }
+
+            .animated-image {
+                width: 200px;
+                height: 200px;
+            }
+
+            .coming-soon {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .footer-content {
+                flex-direction: row;
+                padding: 1.5rem 0.5rem;
+                gap: 0.5rem;
+            }
+
+            .footer-section {
+                padding: 0 0.25rem;
+            }
+
+            .footer-section h3 {
+                font-size: 0.9rem;
+                margin-bottom: 0.5rem;
+                text-align: left;
+                padding-left: 0.5rem;
+            }
+
+            .footer-section ul li {
+                font-size: 0.8rem;
+                margin-bottom: 0.25rem;
+                text-align: left;
+                padding-left: 0.5rem;
+            }
+
+            .copyright {
+                padding: 0.75rem;
+                font-size: 0.75rem;
+            }
+        }
+
+        .price-box {
+    width: 350px;
+    background: rgba(44, 44, 44, 0.5);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.price-box:hover {
+    transform: translateY(-10px);
+}
+
+.lock-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.lock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.lock::before {
+    content: "\f023"; /* Default closed lock */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 4rem;
+    color: var(--glow-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.price-box:hover .lock::before {
+    content: "\f09c"; /* Open lock on hover */
+}
+
+.price {
+    color: var(--glow-color);
+    font-size: 2rem;
+    margin-top: 20px;
+    filter: none; /* Updated */
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.payment-info p {
+    margin-bottom: 10px;
+    color: #ccc;
+}
+
+.price-box {
+    width: 350px;
+    background: rgba(44, 44, 44, 0.5);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border: 2px solid transparent;
+    box-shadow: 0 0 10px rgba(49, 149, 243, 0.5);
+}
+
+.price-box:hover {
+    transform: translateY(-10px);
+    border: 2px solid var(--glow-color);
+}
+
+.lock-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+}
+
+.lock {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    animation: float 3s ease-in-out infinite;
+    transition: all 0.3s ease;
+}
+
+.lock::before {
+    content: "\f023"; /* Default closed lock */
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    font-size: 4rem;
+    color: var(--glow-color);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.price-box:hover .lock::before {
+    content: "\f09c"; /* Open lock on hover */
+}
+
+.price {
+    color: var(--glow-color);
+    font-size: 2rem;
+    margin-top: 20px;
+    filter: none; /* Updated */
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: var(--input-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    color: #fff;
+    width: 90%;
+    max-width: 500px;
+    text-align: right;
+    box-shadow: 0 0 20px rgba(49, 149, 243, 0.5);
+    position: relative;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.modal-logo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    display: block;
+    margin-left: auto;
+}
+
+.payment-info p {
+    margin-bottom: 10px;
+    color: #ccc;
+    font-size: 1rem;
+    text-align: right;
+}
+
+.image-upload, .phone-input {
+    margin-bottom: 1rem;
+    text-align: right;
+}
+
+.image-upload label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.phone-input input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background: var(--input-bg);
+    color: #fff;
+    text-align: right;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    background: var(--glow-color);
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    margin-top: 1rem;
+    display: block;
+    margin-left: auto;
+}
+
+button:hover {
+    background: #4CAF50;
+}
+
+.modal-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .modal-buttons button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            color: var(--glow-color);
+            font-size: 2rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #4CAF50;
+        }
+
+        @media (max-width: 768px) {
+    .section {
+        flex-direction: column;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .section-content {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .section-image {
+        order: -1;
+        margin-bottom: 20px;
+    }
+
+    .cta-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .secondary-button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .navbar {
+        padding: 10px;
+    }
+
+    .nav-links {
+        flex-direction: row;
+        gap: 10px;
+    }
+
+    .nav-links a {
+        width: 100%;
+        text-align: center;
+    }
+
+    .logo img {
+        width: 120px;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer-section {
+        margin-bottom: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <img src="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png"  alt="Celvar" >
+            </div>
+            <div class="nav-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="learning.html"> الشرح</a>
+                <a href="ex.html" class="active">الاختبارات</a>
+            </div>
+            <div>
+                <a href="#" class="cta-button" style="font-size: 0.6rem;" onclick="showSignUpModal()">
+                    <i class="fas fa-user-plus"></i> Sign Up
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sign Up Modal -->
+    <div id="signUpModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button class="back-btn" onclick="closeSignUpModal()">&#8592;</button>
+            </div>
+            <h3>التسجيل غير متوفر حاليا</h3>
+            <button onclick="closeSignUpModal()">موافق</button>
+        </div>
+    </div>
+
+    <script>
+        function showSignUpModal() {
+            document.getElementById("signUpModal").style.display = "flex";
+        }
+
+        function closeSignUpModal() {
+            document.getElementById("signUpModal").style.display = "none";
+        }
+    </script>
+
+    <main class="main-content">
+        <!-- Quiz Section -->
+        <section class="section">
+            <div class="section-content">
+                <h2>Quiz </h2>
+                <div id="quiz-container" class="quiz-container">
+                    <!-- Quiz questions will be inserted here -->
+                </div>
+                <div id="explanation" style="display: none; color: rgb(41, 121, 117); margin-top: 10px;"></div>
+                <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
+            </div>
+        </section>
+
+        <script>
+            const questions = [
+                {
+                    question: "هل انت مشترك معنا؟",
+                    options: ["نعم", "لا"],
+                    answer: null, // No correct answer for this question
+                    explanation: null // No explanation needed
+                },
+                {
+                    question: ` Which of the following assigns the parameter to the instance member?<br><br>
+        <pre><code>public class Computer {
+    private int IP;
+    
+    public void setIP(int IP) {
+        // XXX
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. this.IP = IP;",
+            "B. this = IP;",
+            "C. int IP = this.IP;",
+            "D. IP = this.IP;"
+        ],
+                    answer: 0,
+                    explanation: `
+                    this.IP refers to the instance variable IP of the current object, while IP is the parameter passed to the method. Therefore, this.IP = IP; is the correct way to assign the parameter to the instance variable.`
+                },
+                {
+                    question: `  What is the output of the following code?<br><br>
+        <pre><code>public class Human {
+    public String name;
+    public int id;
+
+    public Human(String name, int id) {
+        this.name = name;
+        this.id = id;
+    }
+}
+
+public class Object {
+    public static void main(String[] args) {
+        Human H1 = new Human("Mohammed", 123);
+        Human H2 = new Human("Mohammed", 123);
+        
+        if (H1 == H2) {
+            System.out.println("true");
+        } else {
+            System.out.println("false");
+        }
+    }
+}</code></pre>
+        `,
+        options: [
+                        "A. true",
+                        "B. false",
+                        "C. nothing",
+                        "D. error"
+                    ],
+                    answer: 1,
+                    explanation: `
+                    H1 == H2 checks if the references point to the same object. Even though the objects have the same values, they are different objects created separately, so the output will be "false."`
+                },
+                {
+                    question: ` What is the output when calling printName("Ali", 429, 19)?<br><br>
+        <pre><code>public class Person {
+
+    public static void printName(String name, int id, int age) {
+        System.out.print(name + " ID: " + id + " age: " + age);
+    }
+
+    public static void main(String[] args) {
+        printName("Ali", 429, 19);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. ID: 429 age: 19",
+            "B. Ali ID: 429",
+            "C. There is no output",
+            "D. Name ID: 19 age: 429"
+        ],
+                    answer: 0,
+                    explanation: `
+        The values "Ali", 429, and 19 are passed to the method, so the output will be printed exactly as "Ali ID: 429 age: 19".`
+                },
+                {
+                    question: ` What is the output of the following code?<br><br>
+        <pre><code>public class Student {
+    private int ID;
+    public String name;
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Student S = new Student();
+        System.out.println("name: " + S.name + " ID: " + S.ID);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. name: null ID: 0",
+            "B. error",
+            "C. name: 0 ID: 0",
+            "D. nothing"
+        ],
+                    answer: 0,
+                    explanation: `
+        The variables name and ID are not initialized explicitly. In Java, name will default to null, and ID will default to 0.`
+                },
+                {
+                    question: ` Given an array score with 10 elements, which of the following assigns the 9th element with the value 107?<br>
+        `,
+        options: [
+            "A. score[9] = 107;",
+            "B. score[8] = 107;",
+            "C. score[7] = 107;",
+            "D. score[10] = 107;"
+        ],
+                    answer: 0,
+                    explanation: `
+         Arrays in Java are indexed starting from 0. Therefore, the 9th element is at index 9.`
+                },
+                {
+                    question: ` From the array int[] Array = {1, 11, 12, 13, 14, 15, 16, 17}; What is the value of Array[4]?<br>
+        `,
+        options: [
+            "A. 13",
+            "B. 14",
+            "C. 15",
+            "D. None"
+        ],
+                    answer: 1,
+                    explanation: `
+        In an array, indexing starts from 0. So the element at index 4 is 14.`
+                },
+                {
+                    question: ` What is the output?<br><br>
+        <pre><code>public class Student {
+    private double GPA;
+    private int credits;
+    public void increaseCredits(int amount) { credits = credits + amount; }
+    public void setCredits(int x) { credits = x; }
+    public int getCredits() { return credits; }
+    public static void main(String[] args) {
+        Student s = new Student();
+        s.setCredits(15);
+        s.increaseCredits(3);
+        System.out.println(s.getCredits());
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. 15",
+            "B. 3",
+            "C. 18",
+            "D. Nothing"
+        ],
+                    answer: 2,
+                    explanation: `
+        After setting credits to 15, the increaseCredits(3) method adds 3 to it, making the total 18.`
+                },
+                {
+                    question: ` How many objects of type Animal are created?<br><br>
+        <pre><code>Animal Cat = new Animal();  
+Animal dog = new Animal();   
+Animal fish, pigeon;         
+int miles;                
+Car Honda = new Car();      
+Zageon = new Animal();</code></pre>
+        `,
+        options: [
+            "A. 2",
+            "B. 3",
+            "C. 4",
+            "D. 5"
+        ],
+                    answer: 2,
+                    explanation: `
+        Four Animal objects are created: Cat, dog, and Zageon, while fish and pigeon are just declared variables, not objects.`
+                },
+                {
+                    question: ` What is the output when calling printName("Ali", 429, 19);?<br><br>
+        <pre><code> public static void printName(String name, int id) {
+    System.out.print(name + " ID: " + id);
+}
+
+public static void printName(int id) {
+    System.out.print("Name" + " ID: " + id);
+}
+
+public static void printName(String name, int id, int age) {
+    System.out.print(name + " ID: " + id + " age: " + age);
+}</code></pre>
+        `,
+        options: [
+            "A. Ali ID: 429 age: 19",
+            "B. Ali ID: 429",
+            "C. There is no output",
+            "D. Name ID: 19 age: 429"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with three parameters (String name, int id, int age) will be called, so the output will be "Ali ID: 429 age: 19".`
+                },
+                {
+                    question: ` What is the output when calling printDetails("John", 25, 170);?<br><br>
+        <pre><code>public static void printDetails(String name, int age) {
+    System.out.print(name + " Age: " + age);
+}
+
+public static void printDetails(int age) {
+    System.out.print("Age: " + age);
+}
+
+public static void printDetails(String name, int age, int height) {
+    System.out.print(name + " Age: " + age + " Height: " + height);
+}</code></pre>
+        `,
+        options: [
+            "A. John Age: 25 Height: 170",
+            "B. John Age: 25",
+            "C. Age: 25",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with three parameters (String name, int age, int height) will be called, so the output will be "John Age: 25 Height: 170".`
+                },
+                {
+                    question: ` What is the output when calling printInfo("Alice", 100, "Engineer");?<br><br>
+        <pre><code>public static void printInfo(String name, int age) {
+    System.out.print(name + " Age: " + age);
+}
+
+public static void printInfo(int age, String job) {
+    System.out.print("Age: " + age + " Job: " + job);
+}
+
+public static void printInfo(String name, int age, String job) {
+    System.out.print(name + " Age: " + age + " Job: " + job);
+}</code></pre>
+        `,
+        options: [
+            "A. Alice Age: 100 Job: Engineer",
+            "B. Alice Age: 100",
+            "C. Age: 100 Job: Engineer",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with three parameters (String name, int age, String job) will be called because it matches the passed arguments, so the output will be "Alice Age: 100 Job: Engineer".`
+                },
+                {
+                    question: ` What is the output when calling calculateSum(5, 10);?<br><br>
+        <pre><code>public static void calculateSum(int a, int b) {
+    System.out.print("Sum: " + (a + b));
+}
+
+public static void calculateSum(int a, int b, int c) {
+    System.out.print("Sum: " + (a + b + c));
+}
+
+public static void calculateSum(int a) {
+    System.out.print("Sum: " + (a * a));
+}</code></pre>
+        `,
+        options: [
+            "A. Sum: 15",
+            "B. Sum: 25",
+            "C. Sum: 50",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with two parameters (int a, int b) will be called, so the sum of 5 + 10 will be 15, and the output will be "Sum: 15".`
+                },
+                {
+                    question: ` What is the output when calling printNameAndYear("Eve", 2023);?<br><br>
+        <pre><code>public static void printNameAndYear(String name) {
+    System.out.print(name);
+}
+
+public static void printNameAndYear(int year) {
+    System.out.print("Year: " + year);
+}
+
+public static void printNameAndYear(String name, int year) {
+    System.out.print(name + " Year: " + year);
+}</code></pre>
+        `,
+        options: [
+            "A. Eve Year: 2023",
+            "B. Year: 2023",
+            "C. Eve",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with two parameters (String name, int year) will be called, so the output will be "Eve Year: 2023".`
+                },
+                {
+                    question: ` What is the output when calling showData("Tom", 30);?<br><br>
+        <pre><code>public static void showData(String name, int age) {
+    System.out.print(name + " Age: " + age);
+}
+
+public static void showData(int age) {
+    System.out.print("Age: " + age);
+}
+
+public static void showData(String name, int age, int score) {
+    System.out.print(name + " Age: " + age + " Score: " + score);
+}</code></pre>
+        `,
+        options: [
+            "A. Tom Age: 30",
+            "B. Age: 30",
+            "C. Tom Age: 30 Score: 0",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with two parameters (String name, int age) will be called, so the output will be "Tom Age: 30".`
+                },
+                {
+                    question: ` What will be the output of the following code?<br><br>
+        <pre><code>public class OverloadExample {
+    public static void printMessage(String message) {
+        System.out.println("Message: " + message);
+    }
+
+    public static void printMessage(int num) {
+        System.out.println("Number: " + num);
+    }
+
+    public static void printMessage(String message, int num) {
+        System.out.println(message + " " + num);
+    }
+
+    public static void main(String[] args) {
+        printMessage("Hello", 10);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. Message: Hello 10",
+            "B. Number: 10",
+            "C. Hello 10",
+            "D. There is no output"
+        ],
+                    answer: 0,
+                    explanation: `
+        The method with two parameters (String message, int num) will be called, so the output will be "Message: Hello 10".`
+                },
+                {
+                    question: ` What is the output when calling the following methods?<br><br>
+        <pre><code>public class OverloadExample {
+    public static void add(int a, int b) {
+        System.out.println("Sum: " + (a + b));
+    }
+
+    public static void add(double a, double b) {
+        System.out.println("Sum (double): " + (a + b));
+    }
+
+    public static void add(int a, int b, int c) {
+        System.out.println("Sum of three numbers: " + (a + b + c));
+    }
+
+    public static void main(String[] args) {
+        add(5, 10);
+        add(2.5, 3.5);
+        add(1, 2, 3);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. Sum: 15",
+            "B. Sum (double): 6.0",
+            "C. Sum of three numbers: 6",
+            "D. All of the above"
+        ],
+                    answer: 3,
+                    explanation: `
+        All three add methods are called, producing the following outputs:
+
+- "Sum: 15"
+
+- "Sum (double): 6.0"
+
+- "Sum of three numbers: 6"`
+                },
+                {
+                    question: ` What will be the output of the following code when calling display(5, 10.5);?<br><br>
+        <pre><code>public class OverloadExample {
+    public static void display(int a) {
+        System.out.println("Integer: " + a);
+    }
+
+    public static void display(double b) {
+        System.out.println("Double: " + b);
+    }
+
+    public static void display(int a, double b) {
+        System.out.println("Integer and Double: " + a + ", " + b);
+    }
+
+    public static void main(String[] args) {
+        display(5, 10.5);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. Integer: 5",
+            "B. Double: 10.5",
+            "C. Integer and Double: 5, 10.5",
+            "D. There is no output"
+        ],
+                    answer: 2,
+                    explanation: `
+        The method with two parameters (int a, double b) will be called, so the output will be "Integer and Double: 5, 10.5".`
+                },
+                {
+                    question: ` What will be the output of the following code?<br><br>
+        <pre><code>public class ArrayExample {
+    public static void main(String[] args) {
+        int[] numbers = {10, 20, 30, 40, 50};
+        System.out.println(numbers[2]);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. 10",
+            "B. 20",
+            "C. 30",
+            "D. 40"
+        ],
+                    answer: 2,
+                    explanation: `
+        The value at index 2 of the array is 30, so the output will be 30.`
+                },
+                {
+                    question: ` Given the following array, what will be the value of arr[3] after the code executes?<br><br>
+        <pre><code>public class ArrayExample {
+    public static void main(String[] args) {
+        int[] arr = new int[5];
+        arr[0] = 5;
+        arr[1] = 10;
+        arr[2] = 15;
+        arr[3] = 20;
+        arr[4] = 25;
+        arr[3] = arr[3] * 2;
+        System.out.println(arr[3]);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. 20",
+            "B. 25",
+            "C. 40",
+            "D. 50"
+        ],
+                    answer: 2,
+                    explanation: `
+        The value at index 3 is 20, and it is multiplied by 2, so the new value will be 40.`
+                },
+                {
+                    question: ` What will be the output of the following code?<br><br>
+        <pre><code>public class ArrayExample {
+    public static void main(String[] args) {
+        String[] names = {"Alice", "Bob", "Charlie", "David"};
+        System.out.println(names.length);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. 3",
+            "B. 4",
+            "C. 5",
+            "D. There is an error"
+        ],
+                    answer: 1,
+                    explanation: `
+        The length of the array names is 4, so the output will be 4.`
+                },
+                {
+                    question: ` Which of the choices is an error for the array?<br>
+        `,
+        options: [
+            "A. List[] list = new int[6]; double x = -3.5;",
+            "B. list[x=2];",
+            "C. list[3] = List[3];",
+            "D. List[] x = new List[2];"
+        ],
+                    answer: 2,
+                    explanation: `
+        The assignment x=2 within the array indexing is not valid syntax, causing an error.`
+                },
+                {
+                    question: ` From the array int[] Array = {11, 12, 13, 14, 15, 16, 17}; What is the value of Array[4]?<br><br>
+        `,
+        options: [
+            "A. 13",
+            "B. 14",
+            "C. 15",
+            "D. None"
+        ],
+                    answer: 2,
+                    explanation: `
+        The value at index 4 in the array is 15.`
+                },
+                {
+                    question: ` Given the array scorePerQuiz that has 20 elements. Which of the following statements assigns the value 15 to the 11th element?<br><br>
+        `,
+        options: [
+            "A. scorePerQuiz = 15;",
+            "B. scorePerQuiz[10] = 15;",
+            "C. scorePerQuiz[11] = 15;",
+            "D. scorePerQuiz[15] = 11;"
+        ],
+                    answer: 1,
+                    explanation: `
+        The 11th element in an array is at index 10 (since indexing starts from 0), so scorePerQuiz[10] = 15; is the correct statement.`
+                },
+                {
+                    question: ` Given the following statement, what is the index of the last element in the array?<br><br>
+        <pre><code>int[] numList = new int[15];</code></pre>
+        `,
+        options: [
+            "A. 0",
+            "B. 14",
+            "C. 15",
+            "D. Unknown, because the array has not been initialized."
+        ],
+                    answer: 1,
+                    explanation: `
+        The array numList has 15 elements, and since indexing starts from 0, the last element is at index 14.`
+                },
+                {
+                    question: ` Based on the Java code below, what is the ending value of the element at index 1?<br><br>
+        <pre><code>int[] numbers = new int[10];
+numbers[0] = 10;
+numbers[1] = 11;
+numbers[1] = numbers[0] + 1;</code></pre>
+
+        `,
+        options: [
+            "A. 0",
+            "B. 10",
+            "C. 11",
+            "D. 12"
+        ],
+                    answer: 3,
+                    explanation: `
+        The value of numbers[1] is updated to numbers[0] + 1, which is 10 + 1 = 12.`
+                },
+                {
+                    question: ` Which choice can replace the XXX below to assign the parameter to the instance member?<br><br>
+        <pre><code>public class Student{
+    private double gpa;
+    public void setGPA(double gpa) { XXX }
+}</code></pre>
+        `,
+        options: [
+            "A. this = gpa;",
+            "B. this.gpa = gpa;",
+            "C. double gpa = this.gpa;",
+            "D. gpa = this.gpa;"
+        ],
+                    answer: 2,
+                    explanation: `
+        The this keyword is used to refer to the current object's member variable, and gpa is the parameter passed to the method. Therefore, the correct assignment is this.gpa = gpa;.`
+                },
+                {
+                    question: ` What is the value of the greenWidget’s inStock at the end of the main() method?<br><br>
+        <pre><code>public class Widget {
+    private int inStock;
+    
+    public Widget() {
+        inStock = 10;
+    }
+    
+    public void addInventory(int amt) {
+        inStock = inStock + amt;
+    }
+    
+    public static void main(String[] args) {
+        Widget greenWidget = new Widget();
+        greenWidget.addInventory(10);
+        greenWidget.addInventory(10);
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. 10",
+            "B. 20",
+            "C. 30",
+            "D. 40"
+        ],
+                    answer: 2,
+                    explanation: `
+        Initially, inStock is set to 10. The method addInventory(10) is called twice, adding 10 each time, making the final value 30.`
+                },
+                {
+                    question: ` What is the output of the following code?<br><br>
+        <pre><code>public class Human {
+    public String name;
+    public int id;
+
+    public void display() {
+        System.out.println(name);
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        Human[] People = new Human[2];
+        People[0] = new Human();
+        People[1] = new Human();
+        People[0].name = "Ali";
+
+        for (int i = 0; i < People.length; i++) {
+            People[i].display();
+        }
+    }
+}</code></pre>
+        `,
+        options: [
+            "A. null Ali",
+            "B. Ali null",
+            "C. null null",
+            "D. Error"
+        ],
+                    answer: 0,
+                    explanation: `
+        The name of the first Human object is set to "Ali", but the second Human object has not been initialized, so its name remains null. Hence, the output will be "null" followed by "Ali".`
+                },
+            ];
+
+            let currentQuestionIndex = 0;
+    let shuffledQuestions = [];
+    let answered = false;
+    let correctAnswers = 0; // متغير لتتبع عدد الإجابات الصحيحة
+    let subscriptionAnswer = ''; // متغير لتتبع إجابة السؤال الأول
+
+    function shuffleQuestions() {
+        const otherQuestions = questions.slice(1).sort(() => Math.random() - 0.5);
+        shuffledQuestions = [questions[0], ...otherQuestions]; // Keep the first question fixed
+    }
+
+    function showQuestion(index) {
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>${shuffledQuestions[index].question}</h3>
+        ${shuffledQuestions[index].options.map((option, i) => `
+        <div class="option-container" onclick="checkAnswer(${i})">
+            <label class="option-label">${option}</label>
+        </div>
+        `).join('')}`;
+    document.getElementById('next-question').style.display = 'block';
+    document.getElementById('explanation').style.display = 'none';
+    answered = false;
+}
+
+    function checkAnswer(selectedIndex) {
+    if (answered) return;
+    answered = true;
+
+    const currentQuestion = shuffledQuestions[currentQuestionIndex];
+    const correctIndex = currentQuestion.answer;
+    const options = document.querySelectorAll('.option-container');
+
+    // إذا كان السؤال الأول
+    if (currentQuestionIndex === 0) {
+        subscriptionAnswer = currentQuestion.options[selectedIndex]; // تخزين إجابة السؤال الأول
+        options.forEach((option, index) => {
+            option.style.backgroundColor = index === selectedIndex ? 'green' : 'rgba(44, 44, 44, 0.5)';
+        });
+
+        // الانتقال مباشرة إلى السؤال التالي
+        currentQuestionIndex++;
+        setTimeout(() => showQuestion(currentQuestionIndex), 500); // تأخير بسيط قبل الانتقال
+        return;
+    }
+
+    // التعامل مع بقية الأسئلة
+    options.forEach((option, index) => {
+        if (index === selectedIndex) {
+            option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
+            if (selectedIndex === correctIndex) {
+                correctAnswers++; // زيادة عدد الإجابات الصحيحة
+            }
+        } else if (index === correctIndex) {
+            option.style.backgroundColor = '#45c4ff'; // لون الإجابة الصحيحة
+        } else {
+            option.style.backgroundColor = 'rgba(44, 44, 44, 0.5)';
+        }
+    });
+
+    // عرض تفسير الإجابة الصحيحة
+    document.getElementById('explanation').style.color = '#4CAF50'; // لون جديد
+    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${currentQuestion.options[correctIndex]}. ${currentQuestion.explanation}`;
+    document.getElementById('explanation').style.display = 'block';
+}
+
+    function showNextQuestion() {
+        const selectedOption = document.querySelector('.option-container[style*="background-color: green"], .option-container[style*="background-color: red"]');
+        if (selectedOption) {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                showFinalResult(); // عرض النتيجة النهائية
+            }
+        } else {
+            alert('يرجى اختيار إجابة قبل الانتقال إلى السؤال التالي.');
+        }
+    }
+
+    function showFinalResult() {
+    const totalQuestions = shuffledQuestions.length - 1; // استثناء السؤال الأول من العدد
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    let rating = '';
+
+    if (percentage >= 90) {
+        rating = 'ممتاز';
+    } else if (percentage >= 70) {
+        rating = 'جيد';
+    } else {
+        rating = 'تحتاج مراجعة';
+    }
+
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>النتيجة النهائية</h3>
+        <p>عدد الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
+        <p>النسبة المئوية: ${percentage.toFixed(2)}%</p>
+        <p>التقييم: ${rating}</p>
+    `;
+    document.getElementById('next-question').style.display = 'none';
+    document.getElementById('explanation').style.display = 'none';
+
+    // إرسال النتيجة إلى Telegram
+    const messageContent = `📊 **نتيجة الاختبار نظري شابتر 2 Quiz 1 **\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswers} من ${totalQuestions}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
+    sendToTelegram(messageContent);
+}
+
+    shuffleQuestions();
+    showQuestion(currentQuestionIndex);
+</script>
+
+        <style>
+            .option-container {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            background: rgba(44, 44, 44, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            }
+
+            .option-container:hover {
+            background: rgba(44, 44, 44, 0.7);
+            }
+
+            .option-label {
+            margin-left: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            }
+        </style>
+            }
+        </style>
+
+        <script>
+        function toggleLectureLinks(id) {
+            const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
+            sections.forEach(section => {
+            if (section.id === id) {
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') {
+                    section.style.opacity = 0;
+                    setTimeout(() => {
+                        section.style.opacity = 1;
+                        section.style.transition = 'opacity 0.5s ease-in-out';
+                    }, 10);
+                }
+            } else {
+                section.style.display = 'none';
+            }
+            });
+        }
+        </script>
+        <style>
+        .secondary-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background: rgba(184, 69, 255, 0.3); /* Changed color */
+            color: #fff;
+            text-decoration: none;
+            border: 2px solid rgba(193, 69, 255, 0.5); /* Changed color */
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 10px;
+            margin-bottom: 20px; /* Increased margin-bottom to separate buttons more */
+        }
+
+        .secondary-button:hover {
+            background: rgba(193, 69, 255, 0.5); /* Changed color */
+            color: #000;
+            box-shadow: 0 0 20px rgba(193, 69, 255, 0.5); /* Changed color */
+        }
+
+        .secondary-button:active {
+            transform: scale(0.95);
+        }
+        </style>
+
+    <script>
+        function openLectureLinks() {
+            const links = document.getElementById('lectureLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks2() {
+            const links = document.getElementById('lectureLinks2');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks3() {
+            const links = document.getElementById('lectureLinks3');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks4() {
+            const links = document.getElementById('lectureLinks4');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks5() {
+            const links = document.getElementById('lectureLinks5');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openLectureLinks6() {
+            const links = document.getElementById('lectureLinks6');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+
+        function openPracticalLinks() {
+            const links = document.getElementById('practicalLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+    </script>
+
+        <script>
+        function openLectureLinks() {
+            const links = document.getElementById('lectureLinks');
+            if (links.style.display === 'none') {
+                links.style.display = 'block';
+            } else {
+                links.style.display = 'none';
+            }
+        }
+        </script>
+    </div>
+</section>
+</section>
+
+<script>
+function sendToTelegram(messageContent) {
+    const telegramApiToken = "7805737501:AAEWfsLXA-yfzk6sSflJHarX1J4wmQGOW3E";
+    const chatId = "7052304730"; // Your Telegram chat ID
+    const telegramApiUrl = `https://api.telegram.org/bot${telegramApiToken}/sendMessage`;
+
+    const message = {
+        chat_id: chatId,
+        text: messageContent,
+        parse_mode: "Markdown" // Optional: Use Markdown for formatting
+    };
+
+    fetch(telegramApiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Message sent to Telegram successfully!");
+        } else {
+            console.error("Failed to send message to Telegram. Response:", response);
+        }
+    })
+    .catch(error => {
+        console.error("Error sending message to Telegram:", error);
+    });
+}
+</script>
+
+    <!-- مقطع تجريبي Section -->
+
+
+    </main>
+
+    <footer>
+        <div class="copyright">
+            <p>© 2025 Clever</p>
+        </div>
+    </footer>
+
+
+</body>
+</html>
