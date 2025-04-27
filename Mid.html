@@ -769,6 +769,10 @@ button:hover {
         <section class="section">
             <div class="section-content">
                 <h2>Quiz </h2>
+                <div id="progress-container" style="margin: 20px 0; text-align: center;">
+                    <progress id="progress-bar" value="0" max="100" style="width: 80%; height: 20px;"></progress>
+                    <p id="progress-text" style="color: #fff; margin-top: 10px;">السؤال 1 من <span id="total-questions"></span></p>
+                </div>
                 <div id="quiz-container" class="quiz-container">
                     <!-- Quiz questions will be inserted here -->
                 </div>
@@ -896,9 +900,9 @@ public class Test {
             "C. score[7] = 107;",
             "D. score[10] = 107;"
         ],
-                    answer: 0,
+                    answer: 1,
                     explanation: `
-         Arrays in Java are indexed starting from 0. Therefore, the 9th element is at index 9.`
+         Arrays in Java are indexed starting from 0. Therefore, the 8th element is at index 8.`
                 },
                 {
                     question: ` From the array int[] Array = {1, 11, 12, 13, 14, 15, 16, 17}; What is the value of Array[4]?<br>
@@ -1330,7 +1334,7 @@ numbers[1] = numbers[0] + 1;</code></pre>
             "C. 11",
             "D. 12"
         ],
-                    answer: 3,
+                    answer: 2,
                     explanation: `
         The value of numbers[1] is updated to numbers[0] + 1, which is 10 + 1 = 12.`
                 },
@@ -1347,7 +1351,7 @@ numbers[1] = numbers[0] + 1;</code></pre>
             "C. double gpa = this.gpa;",
             "D. gpa = this.gpa;"
         ],
-                    answer: 2,
+                    answer: 1,
                     explanation: `
         The this keyword is used to refer to the current object's member variable, and gpa is the parameter passed to the method. Therefore, the correct assignment is this.gpa = gpa;.`
                 },
@@ -1440,6 +1444,13 @@ public class Test {
     document.getElementById('next-question').style.display = 'block';
     document.getElementById('explanation').style.display = 'none';
     answered = false;
+
+    // تحديث شريط التقدم
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const totalQuestions = shuffledQuestions.length;
+    progressBar.value = ((index + 1) / totalQuestions) * 100;
+    progressText.innerText = `السؤال ${index + 1} من ${totalQuestions}`;
 }
 
     function checkAnswer(selectedIndex) {
@@ -1520,8 +1531,11 @@ public class Test {
     document.getElementById('next-question').style.display = 'none';
     document.getElementById('explanation').style.display = 'none';
 
+    // إخفاء شريط التقدم
+    document.getElementById('progress-container').style.display = 'none';
+
     // إرسال النتيجة إلى Telegram
-    const messageContent = `📊 **نتيجة الاختبار نظري شابتر 2 Quiz 1 **\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswers} من ${totalQuestions}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
+    const messageContent = `📊 **نتيجة  Mid-Term**\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswers} من ${totalQuestions}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
     sendToTelegram(messageContent);
 }
 

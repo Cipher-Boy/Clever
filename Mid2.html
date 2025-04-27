@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>الاختبارات</title> 
+    <title>Mid-Term</title>
     <link rel="icon" href="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -56,7 +56,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 5.72rem;
+            gap: 12rem;
         }
 
         .logo {
@@ -310,6 +310,15 @@
             border-top: 1px solid var(--border-color);
             color: #888;
         }
+
+        pre {
+    background: #1e1e1e;
+    color: #dcdcdc;
+    padding: 15px;
+    border-radius: 8px;
+    overflow-x: auto;
+}
+
 
         /* Responsive design */
         @media (max-width: 968px) {
@@ -721,7 +730,6 @@ button:hover {
             <div class="logo">
                 <img src="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png"  alt="Celvar" >
             </div>
-            <logo class="png"></logo>
             <div class="nav-links">
                 <a href="index.html">الرئيسية</a>
                 <a href="learning.html"> الشرح</a>
@@ -734,6 +742,7 @@ button:hover {
             </div>
         </div>
     </nav>
+
     <!-- Sign Up Modal -->
     <div id="signUpModal" class="modal">
         <div class="modal-content">
@@ -755,104 +764,432 @@ button:hover {
         }
     </script>
 
-
     <main class="main-content">
-
-    <!-- Section: الاختبارات النظرية -->
-    <section class="section">
-        <div class="section-content" style="flex: 1;">
-            <h2>الاختبارات النظرية</h2>
-
-            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks1')">شابتر 1 Arrays</a>
-            <div id="lectureLinks1" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="Quiz1.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz1</a>
+        <!-- Quiz Section -->
+        <section class="section">
+            <div class="section-content">
+                <h2>Quiz </h2>
+                <div id="progress-container" style="margin: 20px 0; text-align: center;">
+                    <progress id="progress-bar" value="0" max="100" style="width: 80%; height: 20px;"></progress>
+                    <p id="progress-text" style="color: #fff; margin-top: 10px;">السؤال 1 من <span id="total-questions"></span></p>
+                </div>
+                <div id="quiz-container" class="quiz-container">
+                    <!-- Quiz questions will be inserted here -->
+                </div>
+                <div id="explanation" style="display: none; color: rgb(41, 121, 117); margin-top: 10px;"></div>
+                <button id="next-question" class="cta-button" style="display: none;" onclick="showNextQuestion()">السؤال التالي</button>
             </div>
+        </section>
 
-            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinks2')">شابتر 2 Objects, Classes, and Instances</a>
-            <div id="lectureLinks2" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="Quiz2.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz1</a>
-                <a href="Quiz3.html" class="secondary-button"><i class="fas fa-file-alt"></i> Quiz2</a>
-            </div>
+        <script>
+            const questions = [
+                {
+                    question: "هل انت مشترك معنا؟",
+                    options: ["نعم", "لا"],
+                    answer: null, // No correct answer for this question
+                    explanation: null // No explanation needed
+                },
+                
+                    {
+    question: `We used ______ keyword to refer current class instance variables or methods. It can also be used inside a constructor to invoke another constructor of the same class.`,
+    options: [
+        "A. instanceOf",
+        "B. new",
+        "C. this",
+        "D. private"
+    ],
+    answer: 2,
+    explanation: `
+    'this' keyword refers to the current instance variables or methods of the object, and can invoke another constructor within the same class.`
+},
+{
+    question: `If object1 and object2 are objects of the same class, to make object2 a copy of object1, ________.`,
+    options: [
+        "A. assign object1 to object2, such as object2 = object1",
+        "B. write a copy method that will make a field by field copy of object1 data members into object2 data members",
+        "C. use the no-arg constructor to create object2 with object1 data members",
+        "D. use the default constructor to create object2 with object1 data members"
+    ],
+    answer: 1,
+    explanation: `
+    Writing a copy method ensures that object2 gets a true deep copy of object1’s data members. Simple assignment would just copy references.`
+},
+{
+    question: `What will be returned from the following method header?
+public double[] getValue(int x)`,
+    options: [
+        "A. An integer",
+        "B. An array of integers",
+        "C. A double value",
+        "D. An array of double values"
+    ],
+    answer: 3,
+    explanation: `
+    The return type is 'double[]', meaning an array of double values will be returned.`
+},
+{
+    question: `Assuming a String name in a class is declared as protected attribute, as follows:
+protected String name = "Sara";
+Which of the following can directly access name?`,
+    options: [
+        "A. methods in the same package",
+        "B. methods of a subclass",
+        "C. methods of the same class",
+        "D. all of the above"
+    ],
+    answer: 0,
+    explanation: `
+    Protected attributes can be accessed by classes in the same package, subclasses, and the same class.`
+},
+{
+    question: `In object programming paradigm, combining of attributes and methods into a single object refers to the concept of ________.`,
+    options: [
+        "A. Encapsulation",
+        "B. Aggregation",
+        "C. Abstraction",
+        "D. Composition"
+    ],
+    answer: 0,
+    explanation: `
+    Encapsulation is the concept of bundling data (attributes) and methods (functions) that operate on the data into a single unit or class.`
+},
+{
+    question: `If the following is from the method section of UML diagram, which of the following statements is TRUE?
+equals(object2:Stock): boolean`,
+    options: [
+        "A. This is a private method that receives two objects from the Stock class and returns a boolean value.",
+        "B. This is a public method that accepts a Stock object as its argument and returns a Boolean value.",
+        "C. This is a private method that returns a Boolean value.",
+        "D. This is a public method that returns a Stock object."
+    ],
+    answer: 1,
+    explanation: `
+    In UML, no minus (-) sign means the method is public, and 'boolean' return type means it returns a Boolean value.`
+},
+{
+    question: `To create an object of class Calculator and call CalculateValue method in the main:
+public class Calculator {
+    public double CalculateValue(int x) {
+        return (x+4)/5;
+    }
+}
+Which of the following statements are correct?`,
+    options: [
+        "A. Calculator c1= new Calculator(3); int x = c1.CalculateValue();",
+        "B. Calculator c1= new Calculator(); int x = c1.CalculateValue(4);",
+        "C. Calculator c1= new Calculator(); double x = c1.CalculateValue(4);",
+        "D. Calculator c1= new Calculator(3); double x = c1.CalculateValue(4);"
+    ],
+    answer: 2,
+    explanation: `
+    The method CalculateValue expects an integer parameter and returns a double. Also, Calculator class has no constructor with parameters, so only default constructor can be used.`
+},
+{
+    question: `One or more objects may be created from a(n) ________.`,
+    options: [
+        "A. field",
+        "B. class",
+        "C. method",
+        "D. instance"
+    ],
+    answer: 1,
+    explanation: `
+    A class acts as a blueprint from which multiple objects (instances) can be created.`
+},
+{
+    question: `One of the following code lines declares a character array with 7 elements:`,
+    options: [
+        "A. int oneDarray= new char[7];",
+        "B. char [] oneDarray= [7];",
+        "C. oneDarray= new char[7];",
+        "D. char [] oneDarray= new char[7];"
+    ],
+    answer: 3,
+    explanation: `
+    Correct syntax for creating a character array of 7 elements is 'char[] oneDarray = new char[7];'.`
+},
+{
+    question: `What is the process of defining two or more methods within the same class that have same name but different parameters declaration?`,
+    options: [
+        "A. Method overloading",
+        "B. Method overriding",
+        "C. Method hiding",
+        "D. None of the above"
+    ],
+    answer: 0,
+    explanation: `
+    Method overloading allows multiple methods with the same name but different parameters within the same class.`
+},
+{
+    question: `If the data members of our class are private, what can we do to access them from the class object?`,
+    options: [
+        "A. Create public methods to access those data members",
+        "B. Create private methods to access those data members",
+        "C. Private data members can never be accessed from outside the class",
+        "D. Both A and B"
+    ],
+    answer: 0,
+    explanation: `
+    We typically create public getter and setter methods to access private data members from outside the class.`
+},
+{
+    question: `A derived class extends a base class and inherits the base class’s ________.`,
+    options: [
+        "A. Constructors and public members",
+        "B. Constructors and private members",
+        "C. Public members only",
+        "D. Public and private members"
+    ],
+    answer: 2,
+    explanation: `
+    A derived class inherits only the public and protected members of the base class, not the constructors or private members.`
+},
+{
+    question: `Suppose you create the array arr as follows:
+int[][] arr = new int[5][3];
+Then, arr.length will return:`,
+    options: [
+        "A. 15",
+        "B. 5",
+        "C. 3",
+        "D. 8"
+    ],
+    answer: 1,
+    explanation: `
+    'arr.length' returns the number of rows (first dimension), which is 5, not the total number of elements.`
+},
+{
+    question: `What will be displayed on the screen after executing the code below:
+public class Mystery {
+    static public int succeeded;
+    static public int failed;
+    public Mystery(int s, int f) {
+        succeeded=s; failed=f;
+    }
+    public String toString() {
+        return succeeded + " " + failed;
+    }
+}
+public class MysteryTest {
+    public static void main(String[] args) {
+        Mystery guess = new Mystery(1, 99);
+        Mystery.succeeded = 99;
+        System.out.print(guess.toString());
+    }
+}`,
+    options: [
+        "A. 0 0",
+        "B. 1 99",
+        "C. 99 0",
+        "D. 99 99"
+    ],
+    answer: 3,
+    explanation: `
+    When a new Mystery object is created with (1, 99), 'succeeded' and 'failed' are set.
+    But then, 'Mystery.succeeded = 99;' updates the static variable succeeded to 99.
+    Since 'succeeded' and 'failed' are static (shared across all instances), 
+    when guess.toString() is called, it prints '99 99'.`
+},
+{
+    question: `What will be displayed on the screen after executing the code below:
+public class GuessWhat {
+    public static void guessing(int[] array) {
+        for(int i=0; i<array.length; i++) {
+            if(i%2==0)
+                continue;
+            System.out.println(array[i]);
+        }
+    }
+    public static void main(String[] args) {
+        int[] oneArray = {10, 5, 3};
+        guessing(oneArray);
+    }
+}`,
+    options: [
+        "A. 5",
+        "B. 5 3",
+        "C. 10",
+        "D. 3"
+    ],
+    answer: 0,
+    explanation: `
+    The loop skips elements at even indices (i%2==0).
+    For array {10,5,3}:
+      - i=0 (even): skip
+      - i=1 (odd): print 5
+      - i=2 (even): skip
+    So only '5' is printed.`
+}
 
+
+            ];
+
+            let currentQuestionIndex = 0;
+    let shuffledQuestions = [];
+    let answered = false;
+    let correctAnswers = 0; // متغير لتتبع عدد الإجابات الصحيحة
+    let subscriptionAnswer = ''; // متغير لتتبع إجابة السؤال الأول
+
+    function shuffleQuestions() {
+        const otherQuestions = questions.slice(1).sort(() => Math.random() - 0.5);
+        shuffledQuestions = [questions[0], ...otherQuestions]; // Keep the first question fixed
+    }
+
+    function showQuestion(index) {
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>${shuffledQuestions[index].question}</h3>
+        ${shuffledQuestions[index].options.map((option, i) => `
+        <div class="option-container" onclick="checkAnswer(${i})">
+            <label class="option-label">${option}</label>
         </div>
-    </section>
+        `).join('')}`;
+    document.getElementById('next-question').style.display = 'block';
+    document.getElementById('explanation').style.display = 'none';
+    answered = false;
 
-    <!-- Section: الاختبارات العملية -->
-    <section class="section">
-        <div class="section-content" style="flex: 1;">
-            <h2>الاختبارات العملية</h2>
+    // تحديث شريط التقدم
+    const progressBar = document.getElementById('progress-bar');
+    const progressText = document.getElementById('progress-text');
+    const totalQuestions = shuffledQuestions.length;
+    progressBar.value = ((index + 1) / totalQuestions) * 100;
+    progressText.innerText = `السؤال ${index + 1} من ${totalQuestions}`;
+}
 
-            <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks1')">تمارين على Arrays</a>
-            <div id="practicalLinks1" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="Q_Array.html" class="secondary-button"><i class="fas fa-file-alt"></i>Quiz 1</a>
-            </div>
+    function checkAnswer(selectedIndex) {
+    if (answered) return;
+    answered = true;
 
-	    <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks2')">تمارين على Arrays 2D</a>
-            <div id="practicalLinks2" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="Q_2DArray.html" class="secondary-button"><i class="fas fa-file-alt"></i>Quiz 1</a>
-            </div>
+    const currentQuestion = shuffledQuestions[currentQuestionIndex];
+    const correctIndex = currentQuestion.answer;
+    const options = document.querySelectorAll('.option-container');
 
-	    <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'practicalLinks3')">تمارين على Objects</a>
-            <div id="practicalLinks3" class="lecture-links" style="display: none; margin-top: 10px;">
-                <a href="Q_Object.html" class="secondary-button"><i class="fas fa-file-alt"></i>Quiz 1</a>
-            </div>
-        </div>
-    </section>
+    // إذا كان السؤال الأول
+    if (currentQuestionIndex === 0) {
+        subscriptionAnswer = currentQuestion.options[selectedIndex]; // تخزين إجابة السؤال الأول
+        options.forEach((option, index) => {
+            option.style.backgroundColor = index === selectedIndex ? 'green' : 'rgba(44, 44, 44, 0.5)';
+        });
 
-<!-- Section: الاختبارات الميد -->
-<section class="section">
-    <div class="section-content" style="flex: 1;">
-        <h2>تجميعات للميد تيرم</h2>
-        <p>ملاحظة مهمة الاسئلة تم اخذها من التجميعات وكذلك الاجابات فلذلك قد تحتمل الخطأ
-            اذا وجدت خطا تواصل معنا لو تكرمت
-            <div class="modal-buttons">
-                <button onclick="openTelegram()">
-                    <i class="fab fa-telegram"></i>
-                    تواصل معنا على تيليجرام
-                </button>
-        </p>
-    
+        // الانتقال مباشرة إلى السؤال التالي
+        currentQuestionIndex++;
+        setTimeout(() => showQuestion(currentQuestionIndex), 500); // تأخير بسيط قبل الانتقال
+        return;
+    }
 
-        <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinksMid')">Mid term 1</a>
-        <div id="lectureLinksMid" class="lecture-links" style="display: none; margin-top: 10px;">
-            <a href="Mid.html" class="secondary-button"><i class="fas fa-file-alt"></i> 28 سؤال</a>
-        </div>
+    // التعامل مع بقية الأسئلة
+    options.forEach((option, index) => {
+        if (index === selectedIndex) {
+            option.style.backgroundColor = selectedIndex === correctIndex ? 'green' : 'red';
+            if (selectedIndex === correctIndex) {
+                correctAnswers++; // زيادة عدد الإجابات الصحيحة
+            }
+        } else if (index === correctIndex) {
+            option.style.backgroundColor = '#45c4ff'; // لون الإجابة الصحيحة
+        } else {
+            option.style.backgroundColor = 'rgba(44, 44, 44, 0.5)';
+        }
+    });
 
-        <a href="#" class="cta-button" onclick="toggleLectureLinks(event, 'lectureLinksMid2')">Mid term 2</a>
-        <div id="lectureLinksMid2" class="lecture-links" style="display: none; margin-top: 10px;">
-            <a href="Mid2.html" class="secondary-button"><i class="fas fa-file-alt"></i>  16 سؤال</a>
-        </div>
+    // عرض تفسير الإجابة الصحيحة
+    document.getElementById('explanation').style.color = '#4CAF50'; // لون جديد
+    document.getElementById('explanation').innerText = `الإجابة الصحيحة: ${currentQuestion.options[correctIndex]}. ${currentQuestion.explanation}`;
+    document.getElementById('explanation').style.display = 'block';
+}
 
-    </div>
-</section>
+    function showNextQuestion() {
+        const selectedOption = document.querySelector('.option-container[style*="background-color: green"], .option-container[style*="background-color: red"]');
+        if (selectedOption) {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < shuffledQuestions.length) {
+                showQuestion(currentQuestionIndex);
+            } else {
+                showFinalResult(); // عرض النتيجة النهائية
+            }
+        } else {
+            alert('يرجى اختيار إجابة قبل الانتقال إلى السؤال التالي.');
+        }
+    }
 
+    function showFinalResult() {
+    const totalQuestions = shuffledQuestions.length - 1; // استثناء السؤال الأول من العدد
+    const percentage = (correctAnswers / totalQuestions) * 100;
+    let rating = '';
 
-    <script>
-        function toggleLectureLinks(event, id) {
-            event.preventDefault(); // منع التنقل إلى الرابط
+    if (percentage >= 90) {
+        rating = 'ممتاز';
+    } else if (percentage >= 70) {
+        rating = 'جيد';
+    } else {
+        rating = 'تحتاج مراجعة';
+    }
 
-            // الحصول على جميع الأقسام التي تحتوي على الروابط
+    const quizContainer = document.getElementById('quiz-container');
+    quizContainer.innerHTML = `
+        <h3>النتيجة النهائية</h3>
+        <p>عدد الإجابات الصحيحة: ${correctAnswers} من ${totalQuestions}</p>
+        <p>النسبة المئوية: ${percentage.toFixed(2)}%</p>
+        <p>التقييم: ${rating}</p>
+    `;
+    document.getElementById('next-question').style.display = 'none';
+    document.getElementById('explanation').style.display = 'none';
+
+    // إخفاء شريط التقدم
+    document.getElementById('progress-container').style.display = 'none';
+
+    // إرسال النتيجة إلى Telegram
+    const messageContent = `📊 **نتيجة  Mid-Term 2**\n\n✅ **هل المستخدم مشترك؟**: ${subscriptionAnswer}\n✅ **عدد الإجابات الصحيحة**: ${correctAnswers} من ${totalQuestions}\n📈 **النسبة المئوية**: ${percentage.toFixed(2)}%\n🏅 **التقييم**: ${rating}`;
+    sendToTelegram(messageContent);
+}
+
+    shuffleQuestions();
+    showQuestion(currentQuestionIndex);
+</script>
+
+        <style>
+            .option-container {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            background: rgba(44, 44, 44, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+            transition: background 0.3s ease;
+            cursor: pointer;
+            }
+
+            .option-container:hover {
+            background: rgba(44, 44, 44, 0.7);
+            }
+
+            .option-label {
+            margin-left: 10px;
+            color: #fff;
+            font-size: 1.1rem;
+            }
+        </style>
+            }
+        </style>
+
+        <script>
+        function toggleLectureLinks(id) {
             const sections = document.querySelectorAll('[id^="lectureLinks"], [id^="practicalLinks"]');
-
             sections.forEach(section => {
-                if (section.id === id) {
-                    // التبديل بين العرض والإخفاء
-                    section.style.display = (section.style.display === 'none') ? 'block' : 'none';
-
-                    // إضافة تأثير التلاشي عند العرض
-                    if (section.style.display === 'block') {
-                        section.style.opacity = 0;
-                        setTimeout(() => {
-                            section.style.opacity = 1;
-                            section.style.transition = 'opacity 0.5s ease-in-out';
-                        }, 10);
-                    }
-                } else {
-                    section.style.display = 'none'; // إخفاء باقي الأقسام
+            if (section.id === id) {
+                section.style.display = section.style.display === 'none' ? 'block' : 'none';
+                if (section.style.display === 'block') {
+                    section.style.opacity = 0;
+                    setTimeout(() => {
+                        section.style.opacity = 1;
+                        section.style.transition = 'opacity 0.5s ease-in-out';
+                    }, 10);
                 }
+            } else {
+                section.style.display = 'none';
+            }
             });
         }
-    </script>
+        </script>
         <style>
         .secondary-button {
             display: inline-block;
@@ -960,26 +1297,37 @@ button:hover {
 </section>
 </section>
 
-    <!-- Main Modal -->
-    <div id="mainModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="back-btn" onclick="closeModal()">&#8592;</button>
-            </div>
-            <h3>تواصل معنا للاشتراك:</h3>
-            <div class="modal-buttons">
-                <button onclick="openTelegram()">
-                    <i class="fab fa-telegram"></i>
-                    تواصل معنا على تيليجرام
-                </button>
-                <button onclick="openWhatsApp()">
-                    <i class="fab fa-whatsapp"></i>
-                    تواصل معنا على واتساب
-                </button>
-            </div>
-            </div>
-        </div>
-    </div>
+<script>
+function sendToTelegram(messageContent) {
+    const telegramApiToken = "7805737501:AAEWfsLXA-yfzk6sSflJHarX1J4wmQGOW3E";
+    const chatId = "7052304730"; // Your Telegram chat ID
+    const telegramApiUrl = `https://api.telegram.org/bot${telegramApiToken}/sendMessage`;
+
+    const message = {
+        chat_id: chatId,
+        text: messageContent,
+        parse_mode: "Markdown" // Optional: Use Markdown for formatting
+    };
+
+    fetch(telegramApiUrl, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(message)
+    })
+    .then(response => {
+        if (response.ok) {
+            console.log("Message sent to Telegram successfully!");
+        } else {
+            console.error("Failed to send message to Telegram. Response:", response);
+        }
+    })
+    .catch(error => {
+        console.error("Error sending message to Telegram:", error);
+    });
+}
+</script>
 
     <!-- مقطع تجريبي Section -->
 
@@ -992,155 +1340,6 @@ button:hover {
         </div>
     </footer>
 
-        <script>
-        // Navbar hide/show on scroll
-        let lastScrollY = window.scrollY;
-        window.addEventListener("scroll", () => {
-            const navbar = document.querySelector(".navbar");
-            
-            if (lastScrollY < window.scrollY) {
-                navbar.classList.add("hidden");
-            } else {
-                navbar.classList.remove("hidden");
-            }
-            
-            lastScrollY = window.scrollY;
-        });
-
-        // Smooth team cards scroll
-        const teamCards = document.querySelector('.team-cards');
-        let scrollInterval;
-        let scrollDirection = 1;
-        const scrollSpeed = 1;
-
-        function startAutoScroll() {
-            scrollInterval = setInterval(() => {
-                const maxScroll = teamCards.scrollWidth - teamCards.clientWidth;
-                
-                if (teamCards.scrollLeft >= maxScroll) {
-                    scrollDirection = -1;
-                } else if (teamCards.scrollLeft <= 0) {
-                    scrollDirection = 1;
-                }
-                
-                teamCards.scrollLeft += scrollDirection * scrollSpeed;
-            }, 30);
-        }
-
-        teamCards.addEventListener('mouseenter', () => {
-            clearInterval(scrollInterval);
-        });
-
-        teamCards.addEventListener('mouseleave', startAutoScroll);
-
-        // Start auto-scroll on page load
-        startAutoScroll();
-    </script>
-	
-	<script>
-    function setupTeamCardsRotation() {
-        const cards = document.querySelectorAll('.team-card');
-        let currentIndex = 0;
-        const interval = 2000; // 3 seconds
-
-        // Initially hide all cards except the first one
-        cards.forEach((card, index) => {
-            if (index === 0) {
-                card.classList.add('active');
-            } else {
-                card.classList.add('next');
-            }
-        });
-
-        function rotateCards() {
-            // Remove all classes
-            cards[currentIndex].classList.remove('active');
-            cards[currentIndex].classList.add('prev');
-
-            // Calculate next index
-            currentIndex = (currentIndex + 1) % cards.length;
-
-            // Add active class to current card
-            cards[currentIndex].classList.remove('next');
-            cards[currentIndex].classList.add('active');
-
-            // Update prev and next cards
-            const prevIndex = (currentIndex - 1 + cards.length) % cards.length;
-            const nextIndex = (currentIndex + 1) % cards.length;
-
-            // Clean up previous card
-            setTimeout(() => {
-                cards[prevIndex].classList.remove('prev');
-                cards[prevIndex].classList.add('next');
-            }, 500);
-        }
-
-        // Start the rotation
-        setInterval(rotateCards, interval);
-    }
-
-    // Run the setup when the page loads
-    document.addEventListener('DOMContentLoaded', setupTeamCardsRotation);
-</script>
-
-<script>
-    function unlock(box) {
-        const lock = box.querySelector('.lock');
-        lock.classList.remove('closed');
-        lock.classList.add('open');
-        box.style.border = '2px solid var(--glow-color)';
-        box.style.boxShadow = '0 0 20px rgba(49, 149, 243, 0.5)';
-    }
-    
-    function lock(box) {
-        const lock = box.querySelector('.lock');
-        lock.classList.remove('open');
-        lock.classList.add('closed');
-        box.style.border = '';
-        box.style.boxShadow = '';
-    }
-
-    // Modal functions
-    function openModal() {
-    document.getElementById("mainModal").style.display = "flex";
-}
-
-function closeModal() {
-    document.getElementById("mainModal").style.display = "none";
-    document.getElementById("paymentModal").style.display = "none";
-}
-
-function openPaymentModal() {
-    document.getElementById("paymentModal").style.display = "flex";
-}
-
-function openTelegram() {
-    window.open("https://t.me/CleverJava", "_blank");
-}
-
-function submitPayment() {
-    const phoneNumber = document.getElementById("phoneNumber").value;
-    const receipt = document.getElementById("receiptUpload").files[0];
-
-    const phoneRegex = /^05\d{8}$/;
-    if (!phoneRegex.test(phoneNumber)) {
-        alert("رقم الهاتف غير صالح. يجب أن يبدأ بـ 05 ويحتوي على 10 أرقام.");
-        return;
-    }
-
-    if (!receipt) {
-        alert("يرجى اختيار صورة من الحوالة.");
-        return;
-    }
-
-    alert("شكراً لاشتراكك! سيتم معالجة طلبك قريباً.");
-    closeModal();
-}
-
-function openWhatsApp() {
-            window.open("https://wa.me/966558949741", "_blank");
-        }
-    </script>
 
 </body>
 </html>
