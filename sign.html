@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="https://i.postimg.cc/7ZTp37h8/Screenshot-2025-03-03-031111-removebg-preview.png" type="image/png">
-    <title>تسجيل الدخول / إنشاء حساب</title>
+    <title>تسجيل الدخولhhhhhh/ إنشاء حساب</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -91,21 +91,39 @@
 
     <div class="container">
         <h2>إنشاء حساب</h2>
-        <form action="register.php" method="POST">
+        <form action="cleverjava.42web.io/register.php" method="POST">
             <input type="text" name="username" placeholder="اسم المستخدم" required>
             <input type="password" name="password" placeholder="كلمة المرور" required>
             <button type="submit">إنشاء حساب</button>
         </form>
+        
 
         <div class="divider"></div>
 
         <h2>تسجيل الدخول</h2>
-        <form action="login.php" method="POST">
+        <form action="cleverjava.42web.io/register.php" method="POST">
             <input type="text" name="username" placeholder="اسم المستخدم" required>
             <input type="password" name="password" placeholder="كلمة المرور" required>
             <button type="submit">تسجيل الدخول</button>
         </form>
     </div>
+
+    <?php
+    // افترض أن التحقق من البيانات تم بنجاح
+    $success = true; // قم بتغيير هذا بناءً على منطقك
+
+    if ($success) {
+        echo "<script>
+            alert('تم إنشاء الحساب بنجاح!');
+            window.history.back(); // إعادة المستخدم إلى الصفحة السابقة
+        </script>";
+    } else {
+        echo "<script>
+            alert('حدث خطأ أثناء إنشاء الحساب. حاول مرة أخرى.');
+            window.history.back(); // إعادة المستخدم إلى الصفحة السابقة
+        </script>";
+    }
+    ?>
 
 </body>
 </html>
