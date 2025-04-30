@@ -1,8 +1,8 @@
 <?php
-$servername = "sql208.infinityfree.com";  // اسم الخادم الخاص بـ InfinityFree
-$username = "if0_38865558";               // اسم المستخدم لقاعدة البيانات
-$password = "maSBZDcgZ2AB";               // كلمة المرور لقاعدة البيانات
-$dbname = "if0_38865558_clever";          // اسم قاعدة البيانات التي أنشأتها
+$servername = "fdb1030.awardspace.net";  // اسم الخادم الخاص بـ InfinityFree
+$username = "4626963_clever";               // اسم المستخدم لقاعدة البيانات
+$password = "j/_b]6MN42FbKS9p";               // كلمة المرور لقاعدة البيانات
+$dbname = "4626963_clever";          // اسم قاعدة البيانات التي أنشأتها
 
 // إنشاء الاتصال
 $conn = new mysqli($servername, $username, $password, $dbname);
