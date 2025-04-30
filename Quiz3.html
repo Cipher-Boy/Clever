@@ -744,25 +744,14 @@ button:hover {
     </nav>
 
     <!-- Sign Up Modal -->
-    <div id="signUpModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button class="back-btn" onclick="closeSignUpModal()">&#8592;</button>
-            </div>
-            <h3>التسجيل غير متوفر حاليا</h3>
-            <button onclick="closeSignUpModal()">موافق</button>
-        </div>
-    </div>
-
     <script>
         function showSignUpModal() {
-            document.getElementById("signUpModal").style.display = "flex";
-        }
-
-        function closeSignUpModal() {
-            document.getElementById("signUpModal").style.display = "none";
+            window.location.href = "sign.html";
         }
     </script>
+
+    <!-- Removed redundant modal script -->
+
 
     <main class="main-content">
         <!-- Quiz Section -->
