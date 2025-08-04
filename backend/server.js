@@ -7,6 +7,8 @@ const cors = require('cors');
 const User = require('./models/User');
 
 const app = express();
+
+// Middleware
 app.use(cors());
 app.use(express.json());
 
@@ -15,10 +17,10 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
-.then(() => console.log('MongoDB connected'))
-.catch(err => console.error(err));
+.then(() => console.log('✅ MongoDB connected'))
+.catch(err => console.error('❌ MongoDB connection error:', err));
 
-// User Registration
+// Routes
 app.post('/register', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -42,11 +44,11 @@ app.post('/register', async (req, res) => {
 
     res.status(201).json({ token, userId: newUser._id });
   } catch (error) {
+    console.error('Registration error:', error);
     res.status(500).json({ message: 'خطأ في السيرفر' });
   }
 });
 
-// User Login
 app.post('/login', async (req, res) => {
   try {
     const { username, password } = req.body;
@@ -76,28 +78,11 @@ app.post('/login', async (req, res) => {
       subscription: user.subscription 
     });
   } catch (error) {
+    console.error('Login error:', error);
     res.status(500).json({ message: 'خطأ في السيرفر' });
   }
 });
 
-// Verify Token Middleware
-const authMiddleware = (req, res, next) => {
-  const token = req.headers['authorization'];
-  if (!token) return res.status(401).json({ message: 'غير مصرح به' });
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.userId;
-    next();
-  } catch (error) {
-    res.status(401).json({ message: 'رمز غير صالح' });
-  }
-};
-
-// Protected Route Example
-app.get('/protected', authMiddleware, (req, res) => {
-  res.json({ message: 'تم الوصول إلى محتوى محمي' });
-});
-
+// Start server
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
