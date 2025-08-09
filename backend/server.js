@@ -1,3 +1,6 @@
+// Add this at the top
+const path = require('path');
+
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
@@ -11,6 +14,17 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+
+// Add this before starting server
+if (process.env.NODE_ENV === 'production') {
+  // Serve frontend files
+  app.use(express.static(path.join(__dirname, '../../frontend/public')));
+  
+  // Handle React routing - return all requests to frontend
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../frontend/public', 'index.html'));
+  });
+}
 
 // Connect to MongoDB
 mongoose.connect(process.env.MONGODB_URI, {
